@@ -1,0 +1,23 @@
+# Force index.html pour toutes les URLs
+DirectoryIndex index.html
+
+# Interdire le listage des répertoires
+Options -Indexes
+
+# Autoriser explicitement tous les robots et visiteurs
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Allow from all
+</IfModule>
+
+# Googlebot et autres robots SEO autorisés
+<IfModule mod_setenvif.c>
+  SetEnvIfNoCase User-Agent "Googlebot" allowed_seo
+  SetEnvIfNoCase User-Agent "Bingbot" allowed_seo
+  SetEnvIfNoCase User-Agent "Slurp" allowed_seo
+  SetEnvIfNoCase User-Agent "DuckDuckBot" allowed_seo
+</IfModule>

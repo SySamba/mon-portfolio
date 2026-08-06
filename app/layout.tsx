@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -58,14 +58,17 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0f0f23" },
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-  ],
   appleWebApp: {
     statusBarStyle: "black-translucent",
     title: "Samba SY",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f23" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+  ],
 };
 
 export default function RootLayout({

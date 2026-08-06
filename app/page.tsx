@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SEOLocalSection from "@/components/SEOLocalSection";
 import Image from "next/image";
 import Link from "next/link";
 import FeaturedProjects from "@/components/FeaturedProjects";
@@ -473,6 +474,7 @@ export default function Home() {
           }),
         }}
       />
+    <SEOLocalSection page="home" />
     </>
   );
 }

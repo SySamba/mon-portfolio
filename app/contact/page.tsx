@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import PageHero from "@/components/PageHero";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 export const metadata = {
   title: "Contact - Samba SY | Expert Data Science & IA",
@@ -116,6 +117,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+    <SEOLocalSection page="contact" />
     </>
   );
 }

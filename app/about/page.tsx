@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 export const metadata = {
   title: "À Propos de Samba SY - Parcours Data Scientist IA | Expert Cloud AWS Dakar",
@@ -311,6 +312,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+    <SEOLocalSection page="about" />
     </>
   );
 }

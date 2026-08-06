@@ -1,4 +1,5 @@
 import ProjectsContent from "@/components/ProjectsContent";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 import type { Metadata } from "next";
 
@@ -39,5 +40,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  return <ProjectsContent />;
+  return (
+    <>
+      <ProjectsContent />
+      <SEOLocalSection page="projects" />
+    </>
+  );
 }

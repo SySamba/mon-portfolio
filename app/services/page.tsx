@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ServiceCover from "@/components/ServiceCover";
 import PageHero from "@/components/PageHero";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 export const metadata = {
   title: "Services - Samba SY | Expert IA, Cloud & Data Science",
@@ -219,6 +220,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+    <SEOLocalSection page="services" />
     </>
   );
 }

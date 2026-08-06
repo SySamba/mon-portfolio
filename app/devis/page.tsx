@@ -1,6 +1,7 @@
 import Link from "next/link";
 import DevisForm from "@/components/DevisForm";
 import PageHero from "@/components/PageHero";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 export const metadata = {
   title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
@@ -93,6 +94,7 @@ export default function DevisPage() {
           </div>
         </div>
       </section>
+    <SEOLocalSection page="devis" />
     </>
   );
 }

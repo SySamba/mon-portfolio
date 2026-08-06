@@ -1,4 +1,5 @@
 import BlogContent from "@/components/BlogContent";
+import SEOLocalSection from "@/components/SEOLocalSection";
 
 export const metadata = {
   title: "Blog Samba SY - Articles IA Data Science | Insights Tech Dakar Sénégal",
@@ -25,5 +26,10 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  return <BlogContent />;
+  return (
+    <>
+      <BlogContent />
+      <SEOLocalSection page="blog" />
+    </>
+  );
 }

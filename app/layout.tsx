@@ -14,9 +14,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sambasy.com"),
-  title: "Samba SY - Développeur Web & Data Scientist au Sénégal | Dakar",
+  title: "Samba SY - Data Analyst, Data Scientist & SEO au Sénégal | Développeur Web Dakar",
   description:
-    "Samba SY, développeur web full stack, Data Scientist, Data Analyst et consultant Power BI au Sénégal. Création de sites web, applications mobiles, logiciels et solutions IA à Dakar.",
+    "Samba SY, Data Analyst, Data Scientist, SEO et développeur web full stack au Sénégal. Création de sites web, applications mobiles, logiciels et solutions IA à Dakar.",
   keywords: [
     "développeur web Sénégal",
     "développeur web Dakar",

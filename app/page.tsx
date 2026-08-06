@@ -8,9 +8,9 @@ import ServiceCover from "@/components/ServiceCover";
 import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
-  title: "Samba SY - Développeur Web & Data Scientist au Sénégal | Dakar",
+  title: "Samba SY - Data Analyst, Data Scientist & SEO au Sénégal | Développeur Web Dakar",
   description:
-    "Développeur web full stack, Data Scientist, Data Analyst et consultant Power BI au Sénégal. Création de sites web, applications mobiles et solutions IA à Dakar.",
+    "Samba SY, Data Analyst, Data Scientist, SEO et développeur web full stack au Sénégal. Création de sites web, applications mobiles et solutions IA à Dakar.",
   keywords: [
     "développeur web Sénégal",
     "développeur web Dakar",

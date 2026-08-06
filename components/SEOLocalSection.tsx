@@ -18,7 +18,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-6xl mx-auto px-5">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-              Développeur Web & Data Scientist à Dakar, Sénégal
+              Data Analyst, Data Scientist & SEO à Dakar, Sénégal
             </h2>
             <div className="grid md:grid-cols-2 gap-8 text-text-secondary leading-relaxed">
               <div>
@@ -46,7 +46,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
                 Vous avez collaboré avec moi ? Laissez un avis Google pour aider d’autres entreprises sénégalaises à trouver un développeur web de confiance à Dakar.
               </p>
               <a
-                href="#"
+                href="https://g.page/r/CRUR0N2rsbuQEAE/review"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-accent hover:underline"
@@ -63,7 +63,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-6xl mx-auto px-5">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-              Services de développement web et IA à Dakar
+              Services Data, IA, SEO & Développement Web à Dakar
             </h2>
             <div className="grid md:grid-cols-2 gap-8 text-text-secondary leading-relaxed">
               <div>
@@ -91,7 +91,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-4xl mx-auto px-5 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Parcours d’un développeur web passionné au Sénégal
+              Parcours de Samba SY - Data, IA, SEO & Développement Web au Sénégal
             </h2>
             <p className="text-text-secondary leading-relaxed mb-6">
               Diplômé en Master IA & Big Data et certifié AWS, je mets mon expérience de développeur full stack au service des entreprises du Sénégal et d’Afrique francophone. Mon objectif : transformer vos idées en solutions digitales concrètes, accessibles et évolutives.
@@ -110,7 +110,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-6xl mx-auto px-5">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-              Projets récents : développement web, IA et Data au Sénégal
+              Projets récents : Data Science, IA, SEO et Développement Web au Sénégal
             </h2>
             <p className="text-text-secondary leading-relaxed text-center max-w-3xl mx-auto mb-6">
               Découvrez des applications web, des systèmes de gestion et des solutions IA développées pour des clients au Sénégal. Chaque projet est pensé pour répondre à un besoin local avec une expérience utilisateur optimale et un code maintenable.
@@ -129,7 +129,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-4xl mx-auto px-5 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Contactez un développeur web à Dakar
+              Contactez un expert Data, IA & SEO à Dakar
             </h2>
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Disponible pour vos projets au Sénégal
@@ -145,7 +145,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-4xl mx-auto px-5 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Devis gratuit pour votre projet web ou IA
+              Devis gratuit pour votre projet Data, IA, SEO ou Web
             </h2>
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Tarifs adaptés aux entreprises sénégalaises
@@ -161,7 +161,7 @@ export default function SEOLocalSection({ page }: SEOLocalSectionProps) {
         <section className="py-16 bg-dark-surface border-t border-border-color">
           <div className="max-w-4xl mx-auto px-5 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Blog IA, Data Science et Développement Web
+              Blog Data Science, IA, SEO & Développement Web
             </h2>
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Ressources pour les professionnels tech au Sénégal

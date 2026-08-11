@@ -979,6 +979,47 @@ export const projects = [
     tech: ["PHP", "HTML", "CSS", "JavaScript", "MySQL", "Bootstrap"],
     link: "https://jappo.sambasy.com",
   },
+  {
+    id: "mka-station",
+    category: "web",
+    badge: "Web",
+    image: "/projects/mka-station.png",
+    title: "MKA Station - Gestion de Station-Service (PWA)",
+    description:
+      "Application web PWA pour la gestion d'une station-service : ventes de carburant, caisse, stock des cuves, rapports et export PDF/Excel, avec mode hors ligne.",
+    fullDescription:
+      "Application web de gestion de station-service avec mode hors ligne (PWA). Suivi des ventes de carburant, gestion de caisse, stock des cuves, rapports et export PDF/Excel. L'application est installable, fonctionne avec des données en cache et se synchronise automatiquement au retour du réseau.",
+    year: "2026",
+    client: "MKA Station",
+    role: "Développement Full Stack (Frontend + Backend)",
+    challenge:
+      "Permettre à une station-service de suivre ses ventes, sa caisse et son stock de carburant même en cas de coupure réseau, tout en générant des rapports fiables.",
+    solution:
+      "Développement d'une PWA React/TypeScript avec backend Laravel et MySQL, utilisant Service Worker et IndexedDB pour le mode hors ligne et une synchronisation automatique des données.",
+    features: [
+      "Saisie quotidienne des relevés de pompes avec calcul automatique",
+      "Tableau de bord avec ventes, stock et alertes",
+      "Gestion des utilisateurs avec 3 rôles (admin, gérant, pompiste)",
+      "Rapports périodiques avec export Excel et PDF",
+      "Mode hors ligne : app installable, données en cache, synchronisation automatique au retour du réseau",
+    ],
+    architecture: [
+      "Frontend React / TypeScript",
+      "Backend Laravel",
+      "Base de données MySQL",
+      "Service Worker pour le mode hors ligne",
+      "IndexedDB pour le cache local",
+      "Tailwind CSS",
+    ],
+    results: [
+      "Suivi en temps réel des ventes et de la caisse",
+      "Gestion fiable du stock de carburant",
+      "Continuité de service même sans connexion internet",
+      "Rapports exportables en PDF et Excel",
+    ],
+    tech: ["React", "TypeScript", "Laravel", "MySQL", "Tailwind CSS", "PWA"],
+    link: "https://station.sambasy.com",
+  },
 ];
 
 export default function ProjectsContent() {

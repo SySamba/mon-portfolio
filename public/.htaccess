@@ -26,8 +26,6 @@ Options -Indexes
   SetEnvIfNoCase User-Agent "DuckDuckBot" allowed_seo
 </IfModule>
 
-# Rediriger les URLs sans slash final vers avec slash (301)
-# Ex: /services -> /services/
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.*[^/])$ /$1/ [R=301,L]
+# Apache gere nativement la redirection /services -> /services/ (301)
+# via DirectorySlash On + DirectoryIndex index.html
+# Pas besoin de RewriteRule supplementaire

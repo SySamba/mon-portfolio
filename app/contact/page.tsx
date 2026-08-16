@@ -7,12 +7,12 @@ export const metadata = {
   title: "Contact - Samba SY | Expert Data Science & IA",
   description:
     "Contactez Samba SY pour vos projets en Data Science, Intelligence Artificielle et Cloud Computing. Devis gratuit et consultation personnalisée.",
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "/contact/" },
   openGraph: {
     title: "Contact - Samba SY | Expert Data Science & IA",
     description:
       "Contactez Samba SY pour vos projets en Data Science, Intelligence Artificielle et Cloud Computing. Devis gratuit et consultation personnalisée.",
-    url: "/contact",
+    url: "/contact/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

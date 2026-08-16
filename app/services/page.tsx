@@ -7,12 +7,12 @@ export const metadata = {
   title: "Services - Samba SY | Expert IA, Cloud & Data Science",
   description:
     "Découvrez mes services en Intelligence Artificielle, Cloud Computing, Data Analytics et Développement Full Stack. Solutions sur mesure pour vos projets technologiques.",
-  alternates: { canonical: "/services" },
+  alternates: { canonical: "/services/" },
   openGraph: {
     title: "Services - Samba SY | Expert IA, Cloud & Data Science",
     description:
       "Découvrez mes services en Intelligence Artificielle, Cloud Computing, Data Analytics et Développement Full Stack. Solutions sur mesure pour vos projets technologiques.",
-    url: "/services",
+    url: "/services/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

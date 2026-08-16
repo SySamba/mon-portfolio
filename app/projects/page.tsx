@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "projets Data Science Sénégal",
     "Samba SY",
   ],
-  alternates: { canonical: "/projects" },
+  alternates: { canonical: "/projects/" },
   openGraph: {
     title: "Projets - Samba SY | Développement Web, IA & Data Science au Sénégal",
     description:
       "Portfolio de Samba SY au Sénégal : projets de développement web, applications mobiles, data science, intelligence artificielle, Power BI et cloud. Développeur full stack à Dakar.",
-    url: "/projects",
+    url: "/projects/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

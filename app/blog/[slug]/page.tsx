@@ -395,11 +395,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${article.title} - Samba SY`,
     description: article.subtitle,
     keywords: article.tags,
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: { canonical: `/blog/${slug}/` },
     openGraph: {
       title: `${article.title} - Samba SY`,
       description: article.subtitle,
-      url: `/blog/${slug}`,
+      url: `/blog/${slug}/`,
       images: [{ url: article.image, alt: article.title }],
     },
     twitter: {

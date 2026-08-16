@@ -6,12 +6,12 @@ export const metadata = {
   title: "À Propos de Samba SY - Parcours Data Scientist IA | Expert Cloud AWS Dakar",
   description:
     "Parcours professionnel de Samba SY, Data Scientist expert en IA et Machine Learning à Dakar. Master IA & Big Data, certifié AWS, spécialisé en solutions innovantes pour l'Afrique.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/about/" },
   openGraph: {
     title: "À Propos de Samba SY - Parcours Data Scientist IA | Expert Cloud AWS Dakar",
     description:
       "Parcours professionnel de Samba SY, Data Scientist expert en IA et Machine Learning à Dakar. Master IA & Big Data, certifié AWS, spécialisé en solutions innovantes pour l'Afrique.",
-    url: "/about",
+    url: "/about/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

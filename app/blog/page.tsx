@@ -5,12 +5,12 @@ export const metadata = {
   title: "Blog Samba SY - Articles IA Data Science | Insights Tech Dakar Sénégal",
   description:
     "Blog de Samba SY : articles experts sur l'Intelligence Artificielle, Data Science, Machine Learning, Cloud AWS et DevOps. Insights tech pour l'Afrique et conseils pratiques IA.",
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: "/blog/" },
   openGraph: {
     title: "Blog Samba SY - Articles IA Data Science | Insights Tech Dakar Sénégal",
     description:
       "Blog de Samba SY : articles experts sur l'Intelligence Artificielle, Data Science, Machine Learning, Cloud AWS et DevOps. Insights tech pour l'Afrique et conseils pratiques IA.",
-    url: "/blog",
+    url: "/blog/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

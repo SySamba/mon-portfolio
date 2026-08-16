@@ -7,12 +7,12 @@ export const metadata = {
   title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
   description:
     "Demandez un devis gratuit à Samba SY pour vos projets IA, Data Science, Cloud AWS et développement web à Dakar. Expert certifié, réponse sous 24h, consultation gratuite.",
-  alternates: { canonical: "/devis" },
+  alternates: { canonical: "/devis/" },
   openGraph: {
     title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
     description:
       "Demandez un devis gratuit à Samba SY pour vos projets IA, Data Science, Cloud AWS et développement web à Dakar. Expert certifié, réponse sous 24h, consultation gratuite.",
-    url: "/devis",
+    url: "/devis/",
     siteName: "Samba SY",
     type: "website",
     locale: "fr_FR",

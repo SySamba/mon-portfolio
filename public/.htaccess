@@ -1,5 +1,6 @@
 # Désactiver la redirection automatique d'Apache vers les slash finaux
-DirectorySlash Off
+# (on garde les slashs finaux, c'est volontaire)
+DirectorySlash On
 
 # Force index.html pour toutes les URLs
 DirectoryIndex index.html
@@ -25,18 +26,8 @@ Options -Indexes
   SetEnvIfNoCase User-Agent "DuckDuckBot" allowed_seo
 </IfModule>
 
-# Activer le moteur de réécriture
+# Rediriger les URLs sans slash final vers avec slash (301)
+# Ex: /services -> /services/
 RewriteEngine On
-
-# Rediriger les URLs avec slash final vers sans slash (301)
-RewriteRule ^(.+)/$ /$1 [R=301,L]
-
-# Servir les fichiers .html sans extension
-# Ex: /services -> services.html, /blog/ia-afrique -> blog/ia-afrique.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*?)/?$ $1.html [L]
-
-# Servir index.html pour la racine
-RewriteRule ^$ index.html [L]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/])$ /$1/ [R=301,L]

@@ -6,19 +6,19 @@ const BASE_URL = "https://sambasy.com";
 
 const routes = [
   "",
-  "/projects",
-  "/about",
-  "/services",
-  "/blog",
-  "/contact",
-  "/devis",
-  "/blog/ia-afrique",
-  "/blog/power-bi-dashboards",
-  "/blog/fake-news-nlp",
-  "/blog/aws-migration-guide",
-  "/blog/developpeur-web-senegal",
-  "/blog/data-scientist-senegal",
-  "/blog/consultant-power-bi-senegal",
+  "/projects/",
+  "/about/",
+  "/services/",
+  "/blog/",
+  "/contact/",
+  "/devis/",
+  "/blog/ia-afrique/",
+  "/blog/power-bi-dashboards/",
+  "/blog/fake-news-nlp/",
+  "/blog/aws-migration-guide/",
+  "/blog/developpeur-web-senegal/",
+  "/blog/data-scientist-senegal/",
+  "/blog/consultant-power-bi-senegal/",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

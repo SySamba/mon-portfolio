@@ -452,6 +452,7 @@ export default function Home() {
             "@type": "LocalBusiness",
             name: "Samba SY",
             image: "https://sambasy.com/profil.png",
+            logo: "https://sambasy.com/logo.png",
             telephone: "+221 77 378 48 14",
             email: "sambasy837@gmail.com",
             url: "https://sambasy.com",

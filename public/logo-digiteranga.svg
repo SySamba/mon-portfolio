@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- Etoile du Senegal (verte) -->
+  <polygon points="256,110 270,162 324,162 280,194 296,246 256,214 216,246 232,194 188,162 242,162" fill="#00853F" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Circuit/digital autour de l etoile -->
+  <circle cx="150" cy="170" r="10" fill="#ffffff" opacity="0.9"/>
+  <circle cx="362" cy="170" r="10" fill="#ffffff" opacity="0.9"/>
+  <circle cx="150" cy="350" r="10" fill="#ffffff" opacity="0.9"/>
+  <circle cx="362" cy="350" r="10" fill="#ffffff" opacity="0.9"/>
+
+  <!-- Lignes du circuit -->
+  <line x1="160" y1="170" x2="200" y2="170" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <line x1="312" y1="170" x2="352" y2="170" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <line x1="150" y1="180" x2="150" y2="340" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <line x1="362" y1="180" x2="362" y2="340" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <line x1="160" y1="350" x2="200" y2="350" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <line x1="312" y1="350" x2="352" y2="350" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+
+  <!-- Texte DigiTeranga -->
+  <text x="256" y="430" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle">DigiTeranga</text>
+</svg>

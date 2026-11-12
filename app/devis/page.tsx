@@ -1,94 +1,83 @@
-import Link from "next/link";
 import DevisForm from "@/components/DevisForm";
 import PageHero from "@/components/PageHero";
 import SEOLocalSection from "@/components/SEOLocalSection";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
+export const metadata = pageMetadata({
+  title: "Devis Gratuit : Site Web, Application & Data à Dakar | Samba SY",
   description:
-    "Demandez un devis gratuit à Samba SY pour vos projets IA, Data Science, Cloud AWS et développement web à Dakar. Expert certifié, réponse sous 24h, consultation gratuite.",
-  alternates: { canonical: "/devis/" },
-  openGraph: {
-    title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
-    description:
-      "Demandez un devis gratuit à Samba SY pour vos projets IA, Data Science, Cloud AWS et développement web à Dakar. Expert certifié, réponse sous 24h, consultation gratuite.",
-    url: "/devis/",
-    siteName: "Samba SY",
-    type: "website",
-    locale: "fr_FR",
-    images: [{ url: "/profil.png", alt: "Samba SY" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Devis Gratuit Samba SY - Projets IA Data Science | Cloud AWS Dakar",
-    description:
-      "Demandez un devis gratuit à Samba SY pour vos projets IA, Data Science, Cloud AWS et développement web à Dakar. Expert certifié, réponse sous 24h, consultation gratuite.",
-    images: ["/profil.png"],
-  },
-};
+    "Demandez un devis gratuit pour votre site web, application mobile, tableau de bord Power BI ou projet IA à Dakar. Réponse sous 24h, sans engagement.",
+  path: "/devis/",
+  keywords: [
+    "devis site web Dakar",
+    "prix site web Sénégal",
+    "devis application mobile Sénégal",
+    "tarif développeur web Dakar",
+  ],
+});
+
+const steps = [
+  { title: "Décrivez votre besoin", text: "Donnez un titre clair à votre projet et décrivez vos objectifs en quelques phrases." },
+  { title: "Choisissez le type de projet", text: "Sélectionnez le type le plus proche de votre besoin. Vous pourrez préciser ensuite." },
+  { title: "Recevez votre estimation", text: "Plus vous donnez de détails, plus l'estimation sera précise. Réponse sous 24h." },
+];
 
 export default function DevisPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Devis", path: "/devis/" }])} />
       {/* Hero */}
       <PageHero
-        title="Demander un Devis"
-        subtitle="Obtenez une estimation personnalisée pour votre projet en quelques minutes"
-        image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
+        eyebrow="Devis gratuit"
+        title={<>Demander <em>un devis.</em></>}
+        subtitle="Obtenez une estimation personnalisée pour votre site web, votre application ou votre projet data, en quelques minutes."
       >
-        <div className="mt-8 flex flex-wrap justify-center gap-6 text-text-secondary">
-          <div className="flex items-center gap-2">
-            <i className="fas fa-check-circle text-accent"></i>
-            <span>Devis gratuit et sans engagement</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <i className="fas fa-clock text-accent"></i>
-            <span>Réponse sous 24h</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <i className="fas fa-shield-alt text-accent"></i>
-            <span>Confidentialité garantie</span>
-          </div>
-        </div>
+        <ul className="mt-10 flex flex-wrap gap-2">
+          {["Gratuit et sans engagement", "Réponse sous 24h", "Confidentialité garantie", "Paiement Wave, Orange Money ou virement"].map((t) => (
+            <li key={t} className="t-chip">
+              <span className="w-1.5 h-1.5 rotate-45 bg-[var(--terracotta)] mr-2.5" aria-hidden="true" />
+              {t}
+            </li>
+          ))}
+        </ul>
       </PageHero>
 
-      {/* Form Section */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-dark-card border border-border-color rounded-2xl p-6 sticky top-24">
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <i className="fas fa-lightbulb text-accent"></i> Conseils Rapides
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex gap-3 text-sm text-text-secondary">
-                    <i className="fas fa-check-circle text-accent mt-1"></i>
-                    <span>Donnez un titre clair à votre projet et décrivez vos objectifs en quelques phrases.</span>
-                  </div>
-                  <div className="flex gap-3 text-sm text-text-secondary">
-                    <i className="fas fa-layer-group text-accent mt-1"></i>
-                    <span>Sélectionnez le type de projet le plus proche de votre besoin. Vous pourrez préciser ensuite.</span>
-                  </div>
-                  <div className="flex gap-3 text-sm text-text-secondary">
-                    <i className="fas fa-paperclip text-accent mt-1"></i>
-                    <span>Plus vous donnez de détails, plus l'estimation sera précise.</span>
-                  </div>
-                </div>
-                <div className="mt-6 pt-6 border-t border-border-color">
-                  <strong className="block mb-2">Besoin d'aide ?</strong>
-                  <p className="text-sm text-text-secondary">
-                    <i className="fas fa-envelope text-accent mr-2"></i> sambasy837@gmail.com<br />
-                    <i className="fas fa-phone text-accent mr-2"></i> +221 77 378 48 14
-                  </p>
-                </div>
-              </div>
+      <section className="py-20 lg:py-28">
+        <div className="max-w-[1240px] mx-auto px-5 grid lg:grid-cols-[1fr_1.7fr] gap-14 lg:gap-20 items-start">
+          {/* Étapes */}
+          <aside className="lg:sticky lg:top-28">
+            <p className="t-label"><b>3</b> étapes</p>
+            <h2 className="t-display text-4xl md:text-5xl mt-6 mb-10">
+              Comment <em>ça marche.</em>
+            </h2>
+            <ol>
+              {steps.map((s, i) => (
+                <li key={s.title} className="t-row grid-cols-[56px_1fr] gap-x-4 py-6 px-2">
+                  <span className="font-display italic text-3xl text-accent">0{i + 1}</span>
+                  <span>
+                    <span className="block font-display text-xl">{s.title}</span>
+                    <span className="block text-sm text-text-secondary mt-1 leading-relaxed">{s.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-8 text-sm text-text-secondary space-y-2">
+              <p className="font-bold text-text-primary">Besoin d&apos;aide ?</p>
+              <a href="https://wa.me/221773784814" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-accent">
+                <i className="fab fa-whatsapp text-accent" aria-hidden="true" /> +221 77 378 48 14
+              </a>
+              <a href="mailto:sambasy837@gmail.com" className="flex items-center gap-3 hover:text-accent">
+                <i className="fas fa-envelope text-accent" aria-hidden="true" /> sambasy837@gmail.com
+              </a>
             </div>
+          </aside>
 
-            {/* Form */}
-            <div className="lg:col-span-2 bg-dark-card border border-border-color rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-center mb-8">Demander un Devis</h2>
+          {/* Formulaire */}
+          <div className="bg-dark-card border border-border-color rounded-[28px] overflow-hidden shadow-[var(--shadow-lg)]">
+            <div className="t-weave" aria-hidden="true" />
+            <div className="p-7 md:p-10">
+              <h2 className="font-display text-3xl md:text-4xl font-normal mb-8">Votre projet</h2>
               <DevisForm />
             </div>
           </div>

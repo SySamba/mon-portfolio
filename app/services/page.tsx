@@ -2,32 +2,62 @@ import Link from "next/link";
 import ServiceCover from "@/components/ServiceCover";
 import PageHero from "@/components/PageHero";
 import SEOLocalSection from "@/components/SEOLocalSection";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL, breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Services - Samba SY | Expert IA, Cloud & Data Science",
+// Le cluster « création de site web à Dakar » appartient à la page pilier
+// /blog/creation-site-web-dakar/ : cette page reste la page de conversion et
+// cible la palette de prestations, sans lui disputer la requête principale.
+export const metadata = pageMetadata({
+  title: "Services : Applications, Data, IA, Cloud & SEO à Dakar | Samba SY",
   description:
-    "Découvrez mes services en Intelligence Artificielle, Cloud Computing, Data Analytics et Développement Full Stack. Solutions sur mesure pour vos projets technologiques.",
-  alternates: { canonical: "/services/" },
-  openGraph: {
-    title: "Services - Samba SY | Expert IA, Cloud & Data Science",
-    description:
-      "Découvrez mes services en Intelligence Artificielle, Cloud Computing, Data Analytics et Développement Full Stack. Solutions sur mesure pour vos projets technologiques.",
-    url: "/services/",
-    siteName: "Samba SY",
-    type: "website",
-    locale: "fr_FR",
-    images: [{ url: "/profil.png", alt: "Samba SY" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Services - Samba SY | Expert IA, Cloud & Data Science",
-    description:
-      "Découvrez mes services en Intelligence Artificielle, Cloud Computing, Data Analytics et Développement Full Stack. Solutions sur mesure pour vos projets technologiques.",
-    images: ["/profil.png"],
-  },
-};
+    "Applications web et mobiles, tableaux de bord Power BI, machine learning, cloud AWS et référencement SEO à Dakar, Sénégal. Devis gratuit et réponse sous 24h.",
+  path: "/services/",
+  keywords: [
+    "développement application mobile Sénégal",
+    "consultant Power BI Sénégal",
+    "référencement SEO Dakar",
+    "développement logiciel Sénégal",
+    "intelligence artificielle Sénégal",
+    "cloud AWS Sénégal",
+  ],
+});
 
 const services = [
+  {
+    id: "dev",
+    icon: "fas fa-laptop-code",
+    title: "Développement Full Stack",
+    subtitle: "Création d'applications web et mobiles modernes, performantes et scalables",
+    offerings: [
+      {
+        icon: "fas fa-globe",
+        title: "Développement Web",
+        description: "Sites vitrines, applications web et plateformes e-commerce sur mesure.",
+        details: ["React / Next.js", "PHP / Laravel", "Node.js", "SEO & Performance"],
+      },
+      {
+        icon: "fas fa-mobile-alt",
+        title: "Applications Mobiles",
+        description: "Développement d'applications mobiles cross-platform adaptées à vos besoins.",
+        details: ["React Native", "PWA", "UX Mobile", "API Integration"],
+        link: { href: "/application-mobile-dakar/", label: "Création d'application mobile à Dakar : prix et délais" },
+      },
+      {
+        icon: "fas fa-shopping-cart",
+        title: "E-commerce",
+        description: "Plateformes de vente en ligne complètes avec paiement, stock et gestion commandes.",
+        details: ["Catalogue produits", "Paiement intégré", "Gestion de stock", "Admin dashboard"],
+        link: { href: "/blog/site-ecommerce-dakar/", label: "Création de site e-commerce à Dakar : prix et délais" },
+      },
+      {
+        icon: "fas fa-plug",
+        title: "API & Backend",
+        description: "Conception et développement d'APIs robustes et sécurisées pour vos applications.",
+        details: ["REST API", "GraphQL", "Authentification", "Base de données"],
+      },
+    ],
+  },
   {
     id: "ai",
     icon: "fas fa-brain",
@@ -124,98 +154,233 @@ const services = [
       },
     ],
   },
+];
+
+const solutions = [
   {
-    id: "dev",
-    icon: "fas fa-laptop-code",
-    title: "Développement Full Stack",
-    subtitle: "Création d'applications web et mobiles modernes, performantes et scalables",
-    offerings: [
-      {
-        icon: "fas fa-globe",
-        title: "Développement Web",
-        description: "Sites vitrines, applications web et plateformes e-commerce sur mesure.",
-        details: ["React / Next.js", "PHP / Laravel", "Node.js", "SEO & Performance"],
-      },
-      {
-        icon: "fas fa-mobile-alt",
-        title: "Applications Mobiles",
-        description: "Développement d'applications mobiles cross-platform adaptées à vos besoins.",
-        details: ["React Native", "PWA", "UX Mobile", "API Integration"],
-      },
-      {
-        icon: "fas fa-shopping-cart",
-        title: "E-commerce",
-        description: "Plateformes de vente en ligne complètes avec paiement, stock et gestion commandes.",
-        details: ["Catalogue produits", "Paiement intégré", "Gestion de stock", "Admin dashboard"],
-      },
-      {
-        icon: "fas fa-plug",
-        title: "API & Backend",
-        description: "Conception et développement d'APIs robustes et sécurisées pour vos applications.",
-        details: ["REST API", "GraphQL", "Authentification", "Base de données"],
-      },
-    ],
+    href: "/application-mobile-dakar/",
+    icon: "fas fa-mobile-screen",
+    title: "Application mobile",
+    text: "Android, iOS et PWA en Flutter ou React Native, avec paiement Wave et Orange Money.",
+  },
+  {
+    href: "/logiciel-gestion-stock-senegal/",
+    icon: "fas fa-boxes-stacked",
+    title: "Gestion de stock",
+    text: "Stock, ventes et caisse en temps réel pour boutiques, dépôts et stations-service.",
+  },
+  {
+    href: "/logiciel-gestion-scolaire-senegal/",
+    icon: "fas fa-user-graduate",
+    title: "Gestion scolaire",
+    text: "Inscriptions, notes, bulletins et frais de scolarité pour écoles et instituts.",
+  },
+  {
+    href: "/site-web-association-senegal/",
+    icon: "fas fa-people-group",
+    title: "Site pour association",
+    text: "Site vitrine, gestion des membres, cotisations et cartes de membre.",
   },
 ];
+
+const servicesFaqs = [
+  {
+    question: "Quel est le prix d'un site web professionnel à Dakar ?",
+    answer:
+      "Un site vitrine professionnel coûte de 150 000 à 500 000 FCFA, un site e-commerce de 400 000 à 1 500 000 FCFA et une plateforme sur mesure à partir de 1 000 000 FCFA. Le tarif dépend du nombre de pages, des fonctionnalités et de l'intégration de contenus. Le devis est gratuit.",
+  },
+  {
+    question: "Proposez-vous la maintenance du site après la livraison ?",
+    answer:
+      "Oui. Chaque projet inclut une période de garantie, puis un contrat de maintenance optionnel couvrant les mises à jour, les sauvegardes, la sécurité, l'hébergement et le suivi des performances SEO.",
+  },
+  {
+    question: "Pouvez-vous créer un tableau de bord Power BI pour mon entreprise ?",
+    answer:
+      "Oui. J'accompagne les entreprises sénégalaises de la collecte des données (ETL) à la modélisation et à la création de tableaux de bord Power BI interactifs avec KPIs métiers, formation des équipes incluse.",
+  },
+  {
+    question: "Quelles technologies utilisez-vous ?",
+    answer:
+      "Côté web : React, Next.js, Laravel, Node.js, MySQL et PostgreSQL. Côté mobile : Flutter. Côté data et IA : Python, R, SQL, scikit-learn, TensorFlow et Power BI. Côté cloud : AWS, Azure, Docker et Kubernetes.",
+  },
+];
+
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${SITE_URL}/services/#page`,
+      url: `${SITE_URL}/services/`,
+      name: "Services Samba SY",
+      inLanguage: "fr-FR",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    },
+    ...services.map((service) => ({
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/#${service.id}`,
+      name: service.title,
+      description: service.subtitle,
+      serviceType: service.title,
+      provider: { "@id": `${SITE_URL}/#business` },
+      areaServed: [
+        { "@type": "Country", name: "Sénégal" },
+        { "@type": "City", name: "Dakar" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: service.title,
+        itemListElement: service.offerings.map((offering) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: offering.title,
+            description: offering.description,
+          },
+        })),
+      },
+    })),
+  ],
+};
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          servicesSchema,
+          faqSchema(servicesFaqs),
+          breadcrumbSchema([{ name: "Services", path: "/services/" }]),
+        ]}
+      />
       {/* Hero */}
       <PageHero
-        title="Mes Services"
-        subtitle="Solutions technologiques innovantes pour transformer votre business"
-        image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80"
-      />
+        eyebrow="Services"
+        title={<>Mes <em>services.</em></>}
+        subtitle="Des solutions technologiques concrètes pour transformer votre activité : sites et applications, intelligence artificielle, data et cloud."
+      >
+        <nav className="mt-10 flex flex-wrap gap-2" aria-label="Pôles de services">
+          {services.map((s, i) => (
+            <a key={s.id} href={`#${s.id}`} className="t-chip">
+              <span className="font-display italic text-accent mr-2">0{i + 1}</span>
+              {s.title}
+            </a>
+          ))}
+        </nav>
+      </PageHero>
 
       {/* Services */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-5 space-y-20">
-          {services.map((service) => (
-            <div id={service.id} key={service.id} className="scroll-mt-24">
-              <div className="flex flex-col md:flex-row items-start gap-6 mb-10">
-                <div className="w-full md:w-40 h-32 md:h-32 rounded-2xl overflow-hidden border border-border-color shrink-0">
-                  <ServiceCover id={service.id} title={service.title} />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold mb-2">{service.title}</h2>
-                  <p className="text-text-secondary text-lg">{service.subtitle}</p>
-                </div>
+      {services.map((service, i) => (
+        <section
+          id={service.id}
+          key={service.id}
+          className={`scroll-mt-24 py-20 lg:py-28 ${i % 2 ? "bg-dark-surface" : ""}`}
+        >
+          <div className="max-w-[1240px] mx-auto px-5 grid lg:grid-cols-[1fr_1.7fr] gap-12 lg:gap-20">
+            <div className="lg:sticky lg:top-28 self-start">
+              <p className="t-label"><b>0{i + 1}</b> Pôle</p>
+              <h2 className="t-display text-4xl md:text-5xl mt-6">{service.title}</h2>
+              <p className="mt-5 text-lg text-text-secondary leading-relaxed">{service.subtitle}</p>
+              <div className="mt-8 h-40 rounded-[22px] overflow-hidden border border-border-color hidden lg:block saturate-[.8]">
+                <ServiceCover id={service.id} title={service.title} />
               </div>
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {service.offerings.map((offering) => (
-                  <div key={offering.title} className="service-card">
-                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-3">
-                      <i className={`${offering.icon} text-accent`}></i> {offering.title}
-                    </h3>
-                    <p className="text-text-secondary mb-4">{offering.description}</p>
-                    <ul className="space-y-2">
+            <div>
+              {service.offerings.map((offering) => (
+                <div key={offering.title} className="t-row grid-cols-[48px_1fr] gap-x-5 py-8 px-2">
+                  <span className="service-icon !w-12 !h-12 !text-lg !rounded-full !mb-0">
+                    <i className={offering.icon} aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h3 className="font-display text-2xl md:text-[1.75rem] font-normal">{offering.title}</h3>
+                    <p className="text-text-secondary mt-2 leading-relaxed">{offering.description}</p>
+                    {offering.link && (
+                      <Link href={offering.link.href} className="inline-flex items-center gap-2 mt-3 text-sm font-semibold text-accent underline underline-offset-4">
+                        {offering.link.label} <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+                      </Link>
+                    )}
+                    <ul className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2">
                       {offering.details.map((detail) => (
-                        <li key={detail} className="flex items-center gap-2 text-sm text-text-muted">
-                          <i className="fas fa-check text-accent text-xs"></i> {detail}
+                        <li key={detail} className="flex items-center gap-3 text-sm text-text-secondary">
+                          <span className="w-1.5 h-1.5 rotate-45 bg-[var(--terracotta)] shrink-0" aria-hidden="true" />
+                          {detail}
                         </li>
                       ))}
                     </ul>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+        </section>
+      ))}
+
+      {/* Solutions par secteur */}
+      <section id="solutions" className="py-24 lg:py-32 border-t border-border-color">
+        <div className="max-w-[1240px] mx-auto px-5">
+          <p className="t-label"><b>05</b> Solutions</p>
+          <h2 className="t-display text-4xl md:text-5xl mt-6 mb-12">
+            Solutions <em>par besoin.</em>
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {solutions.map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group bg-dark-card border border-border-color rounded-[22px] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--terracotta)]"
+              >
+                <span className="service-icon !w-12 !h-12 !text-lg !rounded-full !mb-5">
+                  <i className={s.icon} aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-2xl font-normal">{s.title}</h3>
+                <p className="text-text-secondary mt-2 leading-relaxed text-sm">{s.text}</p>
+                <span className="inline-flex items-center gap-2 mt-5 text-sm font-bold text-accent">
+                  En savoir plus <i className="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-24 lg:py-32 border-t border-border-color">
+        <div className="max-w-[1240px] mx-auto px-5 grid lg:grid-cols-[1fr_1.6fr] gap-14">
+          <div>
+            <p className="t-label"><b>FAQ</b> Questions</p>
+            <h2 className="t-display text-4xl md:text-5xl mt-6">
+              Questions fréquentes <em>sur mes services.</em>
+            </h2>
+          </div>
+          <div>
+            {servicesFaqs.map((faq) => (
+              <details key={faq.question} className="t-faq border-t border-border-color last:border-b py-6">
+                <summary className="flex items-start justify-between gap-6">
+                  <span className="font-display text-xl md:text-2xl">{faq.question}</span>
+                  <span className="t-plus t-arrow !w-10 !h-10" aria-hidden="true">
+                    <i className="fas fa-plus text-xs" />
+                  </span>
+                </summary>
+                <p className="text-text-secondary mt-4 leading-relaxed max-w-2xl">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="contact-cta">
         <div className="max-w-[800px] mx-auto px-5 text-center">
-          <h2>Prêt à Démarrer Votre Projet ?</h2>
-          <p>Obtenez un devis gratuit et personnalisé pour vos besoins</p>
+          <h2>Prêt à démarrer votre projet ?</h2>
+          <p>Obtenez un devis gratuit et personnalisé pour vos besoins — réponse sous 24h.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/devis" className="btn-primary">
-              Demander un Devis
+            <Link href="/devis" className="btn-primary uppercase tracking-[0.08em]">
+              Demander un devis <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </Link>
             <Link href="/contact" className="btn-secondary">
-              Me Contacter
+              Me contacter
             </Link>
           </div>
         </div>

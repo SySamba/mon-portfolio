@@ -13,16 +13,13 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
+  const [theme, setThemeState] = useState<Theme>("light");
 
+  // Le thème est déjà appliqué par le script inline du <head> : on se
+  // contente de synchroniser l'état React.
   useEffect(() => {
-    setMounted(true);
-    const stored = typeof window !== "undefined" ? (localStorage.getItem("theme") as Theme) : null;
-    const initial: Theme = stored || "dark";
-    setThemeState(initial);
-    document.documentElement.setAttribute("data-theme", initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    const current = document.documentElement.getAttribute("data-theme") as Theme | null;
+    if (current) setThemeState(current);
   }, []);
 
   const setTheme = (newTheme: Theme) => {
@@ -40,7 +37,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      <div style={{ visibility: mounted ? "visible" : "hidden" }}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
 }

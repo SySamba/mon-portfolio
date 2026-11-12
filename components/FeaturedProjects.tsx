@@ -8,35 +8,32 @@ import ProjectCover from "@/components/ProjectCover";
 import ImageLightbox from "@/components/ImageLightbox";
 import { projects as allProjects } from "@/components/ProjectsContent";
 
+// Sélection mixte (web + IA/Data), en alternance pour varier la grille.
+// Mon Trajet JOJ passe en premier : projet phare de l'année (JOJ Dakar 2026).
 const featuredIds = [
+  "montrajetjoj",
   "fake-news",
-  "diabetes",
-  "covid",
-  "porokhane",
-  "service-mairie",
-  "magueye-boye",
+  "mairie-khombole",
+  "air-traffic",
+  "vending-senegal",
+  "mka-station",
 ];
+
+const isWeb = (category: string) => category.split(" ").some((c) => c === "web" || c === "e-commerce");
 
 const projects = allProjects
   .filter((p) => featuredIds.includes(p.id))
-  .map((p) => ({
-    ...p,
-    category: p.category === "web" || p.category === "e-commerce" ? "development" : "data-science",
-    icon: "fa-eye",
-  }))
   .sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
 
-const developmentProjects = projects.filter((p) => p.category === "development");
-const dataScienceProjects = projects.filter((p) => p.category === "data-science");
+/** Domaine affiché dans la barre du cadre navigateur. */
+const domainOf = (link?: string) => (link ? new URL(link).hostname.replace(/^www\./, "") : null);
 
 export default function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const handleOpen = (project: (typeof projects)[0]) => {
-    if (project.id === "air-traffic") {
-      setLightboxIndex(0);
+    if (project.id === "air-traffic" && project.gallery?.length) {
       setLightboxOpen(true);
     } else {
       setSelectedProject(project);
@@ -44,69 +41,111 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-dark-surface">
-      <div className="max-w-[1200px] mx-auto px-5">
-        <h2 className="section-title">Projets Phares</h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {projects.map((project) => (
-            <div key={project.id} className={`project-card ${project.category}`}>
-              <div className="project-image">
-                {project.image ? (
-                  <Image src={project.image} alt={project.title} fill className="object-cover" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-                ) : (
-                  <ProjectCover id={project.id} title={project.title} />
-                )}
-                <div className="project-overlay">
-                  <button
-                    onClick={() => handleOpen(project)}
-                    className="project-link"
-                    aria-label={project.id === "air-traffic" ? "Voir les images du projet" : "Voir les détails du projet"}
-                  >
-                    <i className={`fas ${project.icon}`}></i>
-                  </button>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-text-secondary text-sm mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                {project.gallery && (
-                  <div className="grid grid-cols-4 gap-2 mt-4">
-                    {project.gallery.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          setLightboxIndex(idx);
-                          setLightboxOpen(true);
-                        }}
-                        className="relative h-12 w-full rounded-lg overflow-hidden border border-border-color hover:opacity-80 transition-opacity"
-                      >
-                        <Image
-                          src={img}
-                          alt={`Aperçu tableau de bord ${idx + 1}`}
-                          fill
-                          className="object-cover"
-                          loading="lazy"
-                          sizes="80px"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+    <section id="projects" className="py-24 lg:py-32">
+      <div className="max-w-[1240px] mx-auto px-5">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+          <div>
+            <p className="t-label"><b>03</b> Réalisations</p>
+            <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6">
+              Projets <em>phares.</em>
+            </h2>
+          </div>
+          <Link href="/projects" className="btn-secondary self-start md:self-auto">
+            Tous les projets <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+          </Link>
         </div>
 
-        <div className="text-center">
-          <Link href="/projects" className="btn-primary">
-            Voir Tous les Projets
-          </Link>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {projects.map((project) => {
+            const domain = domainOf(project.link);
+            return (
+              <article
+                key={project.id}
+                className={`group flex flex-col bg-dark-card border rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--terracotta)_50%,transparent)] ${
+                  project.id === "montrajetjoj"
+                    ? "border-[color-mix(in_srgb,var(--terracotta)_45%,transparent)]"
+                    : "border-border-color"
+                }`}
+              >
+                {/* Capture dans un cadre de navigateur */}
+                <button
+                  onClick={() => handleOpen(project)}
+                  className="block text-left p-3 pb-0"
+                  aria-label={`Voir les détails du projet ${project.title}`}
+                >
+                  <div className="rounded-t-[14px] overflow-hidden border border-b-0 border-border-color bg-dark-surface">
+                    <div className="flex items-center gap-1.5 px-3 h-7 border-b border-border-color">
+                      <span className="w-2 h-2 rounded-full bg-[var(--terracotta)]/70" />
+                      <span className="w-2 h-2 rounded-full bg-[var(--ochre)]/70" />
+                      <span className="w-2 h-2 rounded-full bg-[var(--ocean)]/70" />
+                      <span className="ml-2 text-[10px] text-text-muted truncate">
+                        {domain ?? (isWeb(project.category) ? "application web" : "tableau de bord")}
+                      </span>
+                    </div>
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      {project.id === "montrajetjoj" && (
+                        <span className="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1.5 rounded-full bg-[var(--terracotta)] text-[#fff8ef] shadow-[var(--shadow-md)]">
+                          Projet phare · JOJ Dakar 2026
+                        </span>
+                      )}
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover object-left-top origin-top-left transition-transform duration-700 group-hover:scale-[1.03]"
+                          loading="lazy"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                        />
+                      ) : (
+                        <ProjectCover id={project.id} title={project.title} />
+                      )}
+                    </div>
+                  </div>
+                </button>
+
+                {/* Texte : hauteurs alignées d'une carte à l'autre */}
+                <div className="flex flex-col flex-1 p-6 pt-5 border-t border-border-color">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
+                    {isWeb(project.category) ? "Développement web" : project.category.includes("dashboard") ? "Data & BI" : "Intelligence artificielle"}
+                  </p>
+                  {/* Titre court : « Vending Sénégal - Distributeurs… » → « Vending Sénégal » */}
+                  <h3 className="font-display text-[1.45rem] leading-snug font-normal mt-2 line-clamp-2 sm:min-h-[2lh]">
+                    {project.title.split(" - ")[0]}
+                  </h3>
+                  <p className="text-sm text-text-secondary leading-relaxed mt-2 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-4">
+                    {project.tech.slice(0, 3).map((t) => (
+                      <span key={t} className="text-[11px] font-semibold px-2.5 py-1 rounded-full border border-border-color text-text-secondary">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-5 sm:h-14 flex items-end justify-between">
+                    <button
+                      onClick={() => handleOpen(project)}
+                      className="text-sm font-bold text-text-primary inline-flex items-center gap-2 hover:text-accent transition-colors"
+                    >
+                      Voir le projet
+                      <i className="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    </button>
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="t-arrow !w-9 !h-9 text-text-secondary hover:!bg-[var(--terracotta)] hover:!border-[var(--terracotta)] hover:text-[#fff8ef] transition-colors"
+                        aria-label={`Ouvrir ${project.title} dans un nouvel onglet`}
+                      >
+                        <i className="fas fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
 
@@ -117,9 +156,9 @@ export default function FeaturedProjects() {
       />
 
       <ImageLightbox
-        images={dataScienceProjects.find((p) => p.id === "air-traffic")?.gallery || []}
+        images={projects.find((p) => p.id === "air-traffic")?.gallery || []}
         isOpen={lightboxOpen}
-        initialIndex={lightboxIndex}
+        initialIndex={0}
         onClose={() => setLightboxOpen(false)}
       />
     </section>

@@ -21,6 +21,9 @@
 /build
 /dist
 
+# images sources non compressées (versions WebP servies depuis public/)
+/assets-originals
+
 # misc
 .DS_Store
 *.pem

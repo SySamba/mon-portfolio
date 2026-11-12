@@ -17,10 +17,49 @@ const filters = [
 
 export const projects = [
   {
+    id: "montrajetjoj",
+    category: "web",
+    badge: "Web",
+    image: "/projects/montrajetjoj.webp",
+    title: "Mon Trajet JOJ - Mobilité Jeux Olympiques Dakar 2026",
+    description:
+      "Site d'information sur la mobilité pendant les Jeux Olympiques de la Jeunesse de Dakar 2026 : plans de circulation, mesures fortes et itinéraires vers les sites de compétition.",
+    fullDescription:
+      "Plateforme d'information dédiée à la mobilité pendant les JOJ Dakar 2026, réalisée pour le comité de mobilité. Le site centralise les plans de circulation, les mesures fortes et incitatives de transport, et guide le public vers les sites des épreuves, en français et en anglais.",
+    year: "2026",
+    client: "Comité Mobilité JOJ · MiTTA / CETUD",
+    role: "Développeur Full Stack",
+    challenge:
+      "Livrer un site public à fort trafic, clair et rapide, capable d'informer simultanément le grand public sénégalais et les visiteurs internationaux pendant les Jeux.",
+    solution:
+      "Développement d'un site bilingue FR/EN, avec navigation par rubriques (dispositif, trajet JOJ, plans de circulation, actualités), interface responsive et optimisations de performance et d'accessibilité.",
+    features: [
+      "Site bilingue français / anglais",
+      "Plans de circulation des épreuves",
+      "Mesures fortes et incitatives de transport",
+      "Guide d'itinéraire vers les sites olympiques",
+      "Compte à rebours des Jeux",
+      "Rubriques éditorial et actualités",
+    ],
+    architecture: [
+      "Frontend web responsive",
+      "Gestion de contenu bilingue FR/EN",
+      "Optimisation performance et SEO",
+      "Hébergement et mise en ligne",
+    ],
+    results: [
+      "Point d'information officiel pour la mobilité JOJ 2026",
+      "Accessible au public sénégalais et international",
+      "Navigation simple pendant l'événement",
+    ],
+    tech: ["Web", "Bilingue FR/EN", "Responsive", "SEO"],
+    link: "https://montrajetjoj.sn/",
+  },
+  {
     id: "fake-news",
     category: "ai",
     badge: "IA",
-    image: "/projects/fake-news-v4.jpg",
+    image: "/projects/fake-news-v4.webp",
     title: "Système de Détection de Fake News",
     description: "Application web intelligente capable d'analyser le contenu d'une vidéo ou d'un texte pour en déterminer la véracité.",
     fullDescription:
@@ -58,7 +97,7 @@ export const projects = [
     id: "diabetes",
     category: "ai",
     badge: "IA",
-    image: "/projects/diabete-v1.jpeg",
+    image: "/projects/diabete-v1.webp",
     title: "Application de Prédiction du Diabète",
     description: "Outil prédictif exploitant un modèle de machine learning pour anticiper les risques de diabète.",
     fullDescription:
@@ -93,7 +132,7 @@ export const projects = [
     id: "covid",
     category: "data",
     badge: "Data",
-    image: "/projects/covid.png",
+    image: "/projects/covid.webp",
     title: "Dashboard COVID-19",
     description: "Tableau de bord interactif pour le suivi en temps réel des données COVID-19.",
     fullDescription:
@@ -128,7 +167,7 @@ export const projects = [
     id: "air-traffic",
     category: "dashboard data",
     badge: "BI",
-    image: "/1.png",
+    image: "/1.webp",
     title: "Tableau de Bord Trafic Aérien",
     description: "Projet BI complet : ETL, modélisation et dashboards Power BI avec un design orienté décision.",
     fullDescription:
@@ -158,13 +197,13 @@ export const projects = [
       "Décisions opérationnelles facilitées",
     ],
     tech: ["Power BI", "SQL", "DAX", "Data Modeling", "ETL"],
-    gallery: ["/1.png", "/2.png", "/3.png", "/4.png", "/7.png"],
+    gallery: ["/1.webp", "/2.webp", "/3.webp", "/4.webp", "/7.webp"],
   },
   {
     id: "sales-stock",
     category: "dashboard data",
     badge: "BI",
-    image: "/projects/sales-stock.jpeg",
+    image: "/projects/sales-stock.webp",
     title: "Dashboard Ventes & Gestion de Stock",
     description: "Tableau de bord Power BI pour le suivi des ventes, analyse des produits et gestion optimisée des stocks.",
     fullDescription:
@@ -190,7 +229,7 @@ export const projects = [
     id: "teranga",
     category: "web",
     badge: "Web",
-    image: "/projects/teranga.png",
+    image: "/projects/teranga.webp",
     title: "Site Teranga Numérique",
     description: "Site web professionnel pour l'entreprise Teranga Numérique.",
     fullDescription:
@@ -220,7 +259,7 @@ export const projects = [
     id: "porokhane",
     category: "web",
     badge: "Web",
-    image: "/porokhane.jpg",
+    image: "/porokhane.webp",
     title: "Site Porokhane Digital Consulting",
     description: "Site vitrine moderne pour Porokhane Digital Consulting.",
     fullDescription:
@@ -249,7 +288,7 @@ export const projects = [
     id: "cv-khombole",
     category: "web",
     badge: "Web",
-    image: "/projects/cv-khombole.png",
+    image: "/projects/cv-khombole.webp",
     title: "Plateforme de Collecte CV - Khombole",
     description: "Système web pour aider la commune de Khombole à collecter les CV des étudiants et professionnels.",
     fullDescription:
@@ -279,7 +318,7 @@ export const projects = [
     id: "mairie-khombole",
     category: "web",
     badge: "Web",
-    image: "/mairie-khombole.jpg",
+    image: "/mairie-khombole.webp",
     title: "Site Mairie de Khombole",
     description: "Site web institutionnel moderne pour la Mairie de Khombole.",
     fullDescription:
@@ -306,10 +345,52 @@ export const projects = [
     link: "https://mairiedekhombole.sn/",
   },
   {
+    id: "asc-khombole",
+    category: "web",
+    badge: "Web",
+    image: "/projects/asc-khombole.webp",
+    title: "ASC Khombole - Site Officiel du Club",
+    description:
+      "Site officiel de l'ASC Khombole, club de football pensionnaire de National 2 : effectif, matchs, résultats, actualités, galerie et boutique.",
+    fullDescription:
+      "Site officiel complet de l'ASC Khombole, club de football de Khombole évoluant en National 2. La plateforme présente le club et son histoire depuis 1984, l'effectif des joueurs, le calendrier des matchs et les résultats, les actualités, la galerie photos, les partenaires et une boutique en ligne.",
+    year: "2026",
+    client: "ASC Khombole · National 2",
+    role: "Développeur Full Stack",
+    challenge:
+      "Donner au club une présence en ligne digne d'un champion de National 2 : un site moderne qui centralise la vie sportive (matchs, résultats, effectif) et renforce le lien avec les supporters.",
+    solution:
+      "Développement d'un site dynamique avec React : présentation du club, effectif joueurs, calendrier et résultats des matchs, actualités, galerie, page partenaires et boutique.",
+    features: [
+      "Présentation du club et de son histoire",
+      "Effectif des joueurs détaillé",
+      "Calendrier des matchs et résultats",
+      "Actualités du club",
+      "Galerie photos",
+      "Page partenaires",
+      "Boutique en ligne",
+      "Responsive design",
+    ],
+    architecture: [
+      "Frontend React",
+      "Composants modulaires réutilisables",
+      "Gestion des contenus sportifs",
+      "Optimisation SEO et performance",
+    ],
+    results: [
+      "Site officiel du club en ligne",
+      "Visibilité numérique du club de National 2",
+      "Centralisation des infos sportives pour les supporters",
+      "Point de vente en ligne via la boutique",
+    ],
+    tech: ["React", "JavaScript", "Tailwind CSS", "Responsive", "SEO"],
+    link: "https://asckhombole.sn/",
+  },
+  {
     id: "arbitres",
     category: "web",
     badge: "Web",
-    image: "/projects/arbitres.png",
+    image: "/projects/arbitres.webp",
     title: "Système de Désignation des Arbitres",
     description: "Plateforme de gestion pour la désignation et le suivi des arbitres.",
     fullDescription:
@@ -338,7 +419,7 @@ export const projects = [
     id: "saveurdeco",
     category: "web",
     badge: "E-commerce",
-    image: "/saveurdeco.jpg",
+    image: "/saveurdeco.webp",
     title: "Site Saveur Deco",
     description: "Plateforme e-commerce moderne spécialisée dans la décoration d'intérieur.",
     fullDescription:
@@ -368,7 +449,7 @@ export const projects = [
     id: "magueye-boye",
     category: "web",
     badge: "Web",
-    image: "/projects/magueye-boye.png",
+    image: "/projects/magueye-boye.webp",
     title: "Portfolio Magueye BOYE",
     description: "Site web officiel du Maire de Khombole, Magueye Boye.",
     fullDescription:
@@ -398,7 +479,7 @@ export const projects = [
     id: "anacim-formation",
     category: "web",
     badge: "Web",
-    image: "/projects/anacim-formation.png",
+    image: "/projects/anacim-formation.webp",
     title: "Digitalisation des Formations - ANACIM",
     description:
       "Système de gestion des formations pour les agents de l'ANACIM avec inscription, suivi et tableau de bord administrateur.",
@@ -438,7 +519,7 @@ export const projects = [
     id: "anacim-certification",
     category: "web",
     badge: "Web",
-    image: "/projects/anacim-certification.png",
+    image: "/projects/anacim-certification.webp",
     title: "ANACIM Certification - Inscription & Examen en Ligne",
     description:
       "Plateforme d'inscription en ligne et d'examen avec correction automatique pour les inspecteurs de l'ANACIM.",
@@ -479,7 +560,7 @@ export const projects = [
     id: "anacim-surete",
     category: "web",
     badge: "Web",
-    image: "/projects/anacim-surete.png",
+    image: "/projects/anacim-surete.webp",
     title: "Système de Suivi des Événements de Sûreté - ANACIM",
     description:
       "Application web de suivi et d'analyse des événements de sûreté (incidents et accidents) pour l'ANACIM.",
@@ -520,7 +601,7 @@ export const projects = [
     id: "ipp",
     category: "web",
     badge: "Web",
-    image: "/projects/ipp.png",
+    image: "/projects/ipp.webp",
     title: "Institut Polytechnique Panafricain - Gestion Académique",
     description:
       "Plateforme de Gestion Académique Intelligente : étudiants, enseignants, notes, paiements et bien plus encore.",
@@ -564,7 +645,7 @@ export const projects = [
     id: "stockmaster",
     category: "web",
     badge: "Web",
-    image: "/projects/stockmaster.png",
+    image: "/projects/stockmaster.webp",
     title: "StockMaster - Gestion de Stock Complète",
     description:
       "Application web de gestion de stock : produits, inventaire, alertes, fournisseurs, ventes et tableaux de bord.",
@@ -607,7 +688,7 @@ export const projects = [
     id: "vending-senegal",
     category: "web",
     badge: "Web",
-    image: "/projects/vending-senegal.png",
+    image: "/projects/vending-senegal.webp",
     title: "Vending Sénégal - Distributeurs Automatiques de Snacks",
     description:
       "Site vitrine pour des distributeurs automatiques de snacks avec un SEO très solide.",
@@ -647,7 +728,7 @@ export const projects = [
     id: "service-mairie",
     category: "web mobile",
     badge: "Web & Mobile",
-    image: "/projects/servicemairie.png",
+    image: "/projects/servicemairie.webp",
     title: "Service Mairie - Plateforme Communale en Ligne",
     description:
       "Plateforme de services municipaux numériques : état civil, accompagnement professionnel, soumission de projets, signalements et espace citoyen.",
@@ -693,7 +774,7 @@ export const projects = [
     id: "digidocs",
     category: "web",
     badge: "Web",
-    image: "/projects/digidocs.png",
+    image: "/projects/digidocs.webp",
     title: "DigiDocs - Gestion Électronique des Documents",
     description:
       "Plateforme de gestion électronique des documents avec authentification sécurisée.",
@@ -733,7 +814,7 @@ export const projects = [
     id: "appel-khombole",
     category: "web",
     badge: "Web",
-    image: "/projects/appel-khombole.png",
+    image: "/projects/appel-khombole.webp",
     title: "À l'Appel de Khombole - Gestion des Membres",
     description:
       "Plateforme de gestion des membres et des cartes d'adhésion pour le mouvement des jeunes de Khombole.",
@@ -773,7 +854,7 @@ export const projects = [
     id: "salle-sport",
     category: "web",
     badge: "Web",
-    image: "/projects/salle-sport.png",
+    image: "/projects/salle-sport.webp",
     title: "Salle de Sport - Gestion d'Abonnements",
     description:
       "Application de gestion d'une salle de sport : adhérents, abonnements, paiements et espaces Admin / Adhérent.",
@@ -815,7 +896,7 @@ export const projects = [
     id: "natte-tontine",
     category: "web",
     badge: "Web",
-    image: "/projects/natte-tontine.png",
+    image: "/projects/natte-tontine.webp",
     title: "Natte - Gestion des Tontines",
     description:
       "Plateforme de gestion des tontines et des cotisations journalières.",
@@ -855,7 +936,7 @@ export const projects = [
     id: "issasybio",
     category: "web",
     badge: "E-commerce",
-    image: "/projects/issasybio.png",
+    image: "/projects/issasybio.webp",
     title: "SY BIO - Boutique en Ligne de Produits Naturels",
     description:
       "Site e-commerce de vente en ligne de produits de santé naturels et biologiques.",
@@ -896,7 +977,7 @@ export const projects = [
     id: "medical-distribution",
     category: "web",
     badge: "Web",
-    image: "/projects/medical-distribution.png",
+    image: "/projects/medical-distribution.webp",
     title: "Médical Distribution - Matériels Médicaux à Dakar",
     description:
       "Site e-commerce WordPress pour la vente de matériels médicaux certifiés à Dakar, avec SEO et livraison rapide.",
@@ -939,7 +1020,7 @@ export const projects = [
     id: "asc-jappo",
     category: "web",
     badge: "Web",
-    image: "/projects/jappo.png",
+    image: "/projects/jappo.webp",
     title: "ASC JAPPO - Association Sportive & Culturelle",
     description:
       "Site web de l'ASC JAPPO avec espace d'administration pour la gestion des membres, finances, joueurs et équipements.",
@@ -983,7 +1064,7 @@ export const projects = [
     id: "mka-station",
     category: "web",
     badge: "Web",
-    image: "/projects/mka-station.png",
+    image: "/projects/mka-station.webp",
     title: "MKA Station - Gestion de Station-Service (PWA)",
     description:
       "Application web PWA pour la gestion d'une station-service : ventes de carburant, caisse, stock des cuves, rapports et export PDF/Excel, avec mode hors ligne.",
@@ -1031,125 +1112,143 @@ export default function ProjectsContent() {
       ? projects
       : projects.filter((p) => p.category.split(" ").includes(activeFilter));
 
+  const count = (key: string) =>
+    key === "all" ? projects.length : projects.filter((p) => p.category.split(" ").includes(key)).length;
+
   return (
     <>
       {/* Hero */}
       <PageHero
-        title="Mes Projets"
-        subtitle="Découvrez mes réalisations en IA, Data Science et développement web"
-        image="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1920&q=80"
-      />
-
-    <section className="py-20 min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-5">
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {filters.map((filter) => (
-            <button
-              key={filter.key}
-              onClick={() => setActiveFilter(filter.key)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
-                activeFilter === filter.key
-                  ? "bg-gradient-ai border-transparent text-white"
-                  : "border-border-color text-text-secondary hover:border-accent hover:text-accent"
-              }`}
+        eyebrow="Réalisations"
+        title={<>Mes <em>projets.</em></>}
+        subtitle="Sites web, applications métier, intelligence artificielle et tableaux de bord : des réalisations en ligne, pour des clients au Sénégal et à l'international."
+      >
+        <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 max-w-3xl border-t border-border-color">
+          {[
+            { n: projects.length, l: "Projets réalisés" },
+            { n: count("web"), l: "Sites & applications" },
+            { n: count("ai"), l: "Modèles IA" },
+            { n: count("dashboard"), l: "Dashboards BI" },
+          ].map((s, i) => (
+            <div
+              key={s.l}
+              className={`pt-5 pb-2 border-border-color ${i % 2 ? "pl-5 border-l" : ""} ${i === 2 ? "md:pl-5 md:border-l" : ""}`}
             >
-              {filter.label}
-            </button>
+              <dt className="sr-only">{s.l}</dt>
+              <dd className="font-display text-4xl md:text-5xl">{s.n}</dd>
+              <dd className="text-xs md:text-sm text-text-muted mt-1">{s.l}</dd>
+            </div>
           ))}
-        </div>
+        </dl>
+      </PageHero>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="project-card development">
-              <div className="project-image relative">
-                {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    loading="lazy"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                ) : (
-                  <ProjectCover id={project.id} title={project.title} />
-                )}
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-dark-card text-accent border border-border-color z-10">
-                  {project.badge}
+      <section className="py-16 lg:py-24 min-h-screen">
+        <div className="max-w-[1240px] mx-auto px-5">
+          {/* Filtres */}
+          <div className="flex flex-wrap gap-2 mb-14" role="tablist" aria-label="Filtrer les projets">
+            {filters.map((filter) => {
+              const active = activeFilter === filter.key;
+              return (
+                <button
+                  key={filter.key}
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveFilter(filter.key)}
+                  className={`t-chip ${active ? "!bg-[var(--terracotta)] !border-[var(--terracotta)] !text-[#fff8ef]" : ""}`}
+                >
+                  {filter.label}
+                  <span className={`ml-2 text-xs ${active ? "opacity-80" : "text-text-muted"}`}>{count(filter.key)}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Grille */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+            {filteredProjects.map((project, i) => (
+              <article key={project.id} className="group">
+                <div className="relative">
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="relative block w-full aspect-[16/11] overflow-hidden rounded-[22px] border border-border-color bg-dark-surface"
+                    aria-label={`Voir les détails de ${project.title}`}
+                  >
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover object-left-top origin-top-left transition-transform duration-700 group-hover:scale-[1.04]"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <ProjectCover id={project.id} title={project.title} />
+                    )}
+                    <span className="absolute top-4 right-4 t-arrow !bg-dark-card/90 backdrop-blur text-text-primary transition-all duration-300 group-hover:!bg-[var(--terracotta)] group-hover:text-[#fff8ef] group-hover:-rotate-45">
+                      <i className="fas fa-arrow-right text-sm" aria-hidden="true" />
+                    </span>
+                  </button>
                 </div>
-                <div className="project-overlay z-20">
-                  {project.link ? (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <i className="fas fa-external-link-alt"></i>
-                    </a>
-                  ) : (
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="project-link"
-                      aria-label={`Voir les détails de ${project.title}`}
-                    >
-                      <i className="fas fa-eye"></i>
-                    </button>
-                  )}
-                  {project.articleLink && (
-                    <Link href={project.articleLink} className="project-link" aria-label="Lire l'article">
-                      <i className="fas fa-book-open"></i>
-                    </Link>
-                  )}
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-text-secondary text-sm mb-4">{project.description}</p>
-                {project.features && (
-                  <div className="space-y-1 mb-4">
-                    {project.features.slice(0, 2).map((f) => (
-                      <p key={f} className="text-xs text-text-muted flex items-center gap-2">
-                        <i className="fas fa-check text-accent"></i> {f}
-                      </p>
+
+                <div className="pt-6">
+                  <p className="t-label !tracking-[0.18em]">
+                    <b>{String(i + 1).padStart(2, "0")}</b>
+                    {project.badge}
+                  </p>
+                  <h3 className="font-display text-2xl font-normal mt-3">{project.title}</h3>
+                  <p className="text-text-secondary mt-3 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-4">
+                    {project.tech.map((t) => (
+                      <span key={t} className="text-xs font-bold uppercase tracking-wider text-text-muted">{t}</span>
                     ))}
                   </div>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
+                  {(project.link || project.articleLink) && (
+                    <div className="flex flex-wrap gap-5 mt-5 text-sm font-bold">
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent inline-flex items-center gap-2 hover:underline underline-offset-4"
+                        >
+                          Voir en ligne <i className="fas fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
+                        </a>
+                      )}
+                      {project.articleLink && (
+                        <Link href={project.articleLink} className="text-text-secondary inline-flex items-center gap-2 hover:text-accent">
+                          Lire l&apos;article <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+                        </Link>
+                      )}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-          {[
-            { number: `${projects.length}`, label: "Projets Réalisés" },
-            { number: `${projects.filter((p) => p.category === "web").length}`, label: "Projets Développement" },
-            { number: `${projects.filter((p) => p.category === "ai").length}`, label: "Modèles IA Développés" },
-            { number: `${projects.filter((p) => p.category.includes("dashboard")).length}`, label: "Dashboards BI" },
-          ].map((stat) => (
-            <div key={stat.label} className="profile-card text-center py-6">
-              <div className="text-3xl font-bold text-accent mb-2">{stat.number}</div>
-              <div className="text-sm text-text-secondary">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+        <ProjectModal
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          project={selectedProject}
+        />
+      </section>
 
-      <ProjectModal
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-        project={selectedProject}
-      />
-    </section>
+      <section className="contact-cta">
+        <div className="max-w-[800px] mx-auto px-5 text-center">
+          <h2>Votre projet sera le prochain ?</h2>
+          <p>Site vitrine, e-commerce, application métier ou tableau de bord : parlons-en.</p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/devis" className="btn-primary uppercase tracking-[0.08em]">
+              Demander un devis <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+            </Link>
+            <Link href="/contact" className="btn-secondary">
+              Me contacter
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

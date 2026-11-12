@@ -8,6 +8,9 @@ DirectoryIndex index.html
 # Interdire le listage des répertoires
 Options -Indexes
 
+# Page 404 de Next.js (export statique)
+ErrorDocument 404 /404.html
+
 # Autoriser explicitement tous les robots et visiteurs
 <IfModule mod_authz_core.c>
   Require all granted
@@ -29,3 +32,64 @@ Options -Indexes
 # Apache gere nativement la redirection /services -> /services/ (301)
 # via DirectorySlash On + DirectoryIndex index.html
 # Pas besoin de RewriteRule supplementaire
+
+# Canonicalisation du domaine : une seule version indexable (301 permanent)
+# HTTP -> HTTPS est déjà géré par le CDN Hostinger (hcdn). Ne pas tester
+# %{HTTPS} ici : derrière le CDN l'origine peut le voir à "off" et boucler.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^www\.sambasy\.com$ [NC]
+  RewriteRule ^ https://sambasy.com%{REQUEST_URI} [L,R=301]
+
+  # /index.html répondait 200 en doublon de la racine
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /%1 [L,R=301]
+</IfModule>
+
+# Compression (Hostinger active déjà Brotli en edge, on couvre l'origine)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+</IfModule>
+
+# Cache navigateur : critère Core Web Vitals / PageSpeed
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Assets Next.js avec hash dans le nom : immuables
+  <FilesMatch "\.(js|css|woff2|woff|ttf|otf|eot)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Images et médias
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|pdf|mp4)$">
+    ExpiresDefault "access plus 6 months"
+    Header set Cache-Control "public, max-age=15552000"
+  </FilesMatch>
+
+  # HTML : toujours revalidé pour que les mises à jour SEO soient prises en compte
+  <FilesMatch "\.(html|xml|txt)$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Types MIME explicites (certains hébergeurs servent .webp en octet-stream)
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType video/mp4 .mp4
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# En-têtes de sécurité (signal de qualité, aucun impact sur le crawl)
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>

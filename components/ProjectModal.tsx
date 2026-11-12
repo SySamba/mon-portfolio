@@ -55,20 +55,21 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
       onClick={onClose}
     >
       <div
-        className="bg-dark-card border border-border-color rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+        className="bg-dark-card border border-border-color rounded-[28px] max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-[var(--shadow-xl)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header image */}
         {project.image && (
           <div
-            className="relative h-48 md:h-64 w-full overflow-hidden rounded-t-2xl cursor-pointer group"
+            className="relative h-52 md:h-72 w-full overflow-hidden rounded-t-[28px] cursor-pointer group"
             onClick={() => {
               setLightboxIndex(0);
               setLightboxOpen(true);
             }}
           >
-            <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="100vw" />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent"></div>
+            <Image src={project.image} alt={project.title} fill className="object-cover object-left-top group-hover:scale-[1.03] transition-transform duration-500" sizes="(max-width: 900px) 100vw, 900px" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-card/90 via-transparent to-transparent"></div>
+            <div className="t-weave absolute bottom-0 left-0 right-0" aria-hidden="true" />
             <button
               onClick={onClose}
               className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black/80 flex items-center justify-center transition-colors"
@@ -99,7 +100,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             {project.year && <span className="text-sm text-text-muted">{project.year}</span>}
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 pr-12">{project.title}</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-normal leading-tight mb-5 pr-12">{project.title}</h2>
 
           {(project.client || project.role) && (
             <div className="grid sm:grid-cols-2 gap-4 mb-6 text-sm text-text-secondary">
@@ -124,21 +125,21 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {project.challenge && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">Problématique</h3>
+              <h3 className="font-display text-xl font-normal mb-2">Problématique</h3>
               <p className="text-text-secondary leading-relaxed">{project.challenge}</p>
             </div>
           )}
 
           {project.solution && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">Solution</h3>
+              <h3 className="font-display text-xl font-normal mb-2">Solution</h3>
               <p className="text-text-secondary leading-relaxed">{project.solution}</p>
             </div>
           )}
 
           {project.features && project.features.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Fonctionnalités clés</h3>
+              <h3 className="font-display text-xl font-normal mb-3">Fonctionnalités clés</h3>
               <ul className="grid sm:grid-cols-2 gap-2">
                 {project.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-2 text-text-secondary">
@@ -152,7 +153,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {project.architecture && project.architecture.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Architecture & Technologies</h3>
+              <h3 className="font-display text-xl font-normal mb-3">Architecture & Technologies</h3>
               <ul className="space-y-2">
                 {project.architecture.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-text-secondary">
@@ -166,7 +167,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {project.results && project.results.length > 0 && (
             <div className="mb-6 bg-dark-surface rounded-xl p-5 border border-border-color">
-              <h3 className="text-lg font-semibold mb-3">Résultats</h3>
+              <h3 className="font-display text-xl font-normal mb-3">Résultats</h3>
               <ul className="space-y-2">
                 {project.results.map((result) => (
                   <li key={result} className="flex items-start gap-2 text-text-secondary">
@@ -180,7 +181,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {project.tech && project.tech.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Technologies</h3>
+              <h3 className="font-display text-xl font-normal mb-3">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((t) => (
                   <span key={t} className="project-tech-span">{t}</span>
@@ -191,7 +192,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
 
           {project.gallery && project.gallery.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Aperçus</h3>
+              <h3 className="font-display text-xl font-normal mb-3">Aperçus</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {project.gallery.map((img, idx) => (
                   <button

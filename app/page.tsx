@@ -3,14 +3,16 @@ import SEOLocalSection from "@/components/SEOLocalSection";
 import Image from "next/image";
 import Link from "next/link";
 import FeaturedProjects from "@/components/FeaturedProjects";
-import BlogCover from "@/components/BlogCover";
-import ServiceCover from "@/components/ServiceCover";
 import Testimonials from "@/components/Testimonials";
+import JsonLd from "@/components/JsonLd";
+import VideoPopup from "@/components/VideoPopup";
+import { faqSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Samba SY - Data Analyst, Data Scientist & SEO au Sénégal | Développeur Web Dakar",
+export const metadata: Metadata = pageMetadata({
+  title: "Développeur Web à Dakar — Sites, Apps & IA | Samba SY",
   description:
-    "Samba SY, Data Analyst, Data Scientist, SEO et développeur web full stack au Sénégal. Création de sites web, applications mobiles et solutions IA à Dakar.",
+    "Développeur web full stack à Dakar : création de sites web, e-commerce, applications et solutions IA au Sénégal. Data Scientist & certifié AWS. Devis gratuit sous 24h.",
+  path: "/",
   keywords: [
     "développeur web Sénégal",
     "développeur web Dakar",
@@ -28,334 +30,338 @@ export const metadata: Metadata = {
     "référencement SEO Sénégal",
     "Samba SY",
   ],
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Samba SY - Développeur Web & Data Scientist au Sénégal",
-    description:
-      "Développeur web full stack, Data Scientist et consultant Power BI à Dakar. Sites web, mobile, IA et Business Intelligence.",
-    url: "/",
-    images: [{ url: "/profil.png", alt: "Samba SY" }],
-  },
-};
+});
 
-const services = [
+const faqs = [
   {
-    id: "ai",
-    icon: "fa-brain",
-    title: "Intelligence Artificielle",
-    description:
-      "Développement de modèles ML/DL, NLP, Computer Vision et systèmes de recommandation intelligents pour transformer vos données en solutions innovantes.",
-    features: ["Machine Learning", "Deep Learning", "NLP & Computer Vision"],
+    question: "Combien coûte la création d'un site web au Sénégal ?",
+    answer:
+      "Le prix d'un site web à Dakar dépend du type de projet : un site vitrine professionnel coûte de 150 000 à 500 000 FCFA, un site e-commerce de 400 000 à 1 500 000 FCFA, une application mobile de 800 000 à 3 000 000 FCFA, et une plateforme sur mesure à partir de 1 000 000 FCFA. Chaque projet fait l'objet d'un devis gratuit et détaillé.",
   },
   {
-    id: "cloud",
-    icon: "fa-cloud",
-    title: "Cloud & DevOps",
-    description:
-      "Architecture cloud AWS, CI/CD, Infrastructure as Code, containerisation Docker/Kubernetes pour des déploiements scalables et sécurisés.",
-    features: ["AWS Cloud Architecture", "CI/CD Pipeline", "Docker & Kubernetes"],
+    question: "Quels sont les délais de réalisation d'un projet ?",
+    answer:
+      "Un site vitrine est livré en 2 à 3 semaines, un site e-commerce en 4 à 6 semaines et une application web ou mobile sur mesure en 6 à 12 semaines selon les fonctionnalités. Les délais sont confirmés dans le devis.",
   },
   {
-    id: "data",
-    icon: "fa-chart-line",
-    title: "Data Analytics & BI",
-    description:
-      "Analyse prédictive, tableaux de bord interactifs, ETL et visualisation de données avancée pour optimiser vos décisions business.",
-    features: ["Tableaux de Bord", "Analyse Prédictive", "ETL & Data Pipeline"],
+    question: "Travaillez-vous avec des clients hors de Dakar ?",
+    answer:
+      "Oui. Basé à Dakar, j'accompagne des clients partout au Sénégal (Thiès, Saint-Louis, Ziguinchor…), en Afrique de l'Ouest ainsi qu'en Europe, en télétravail avec des points de suivi réguliers.",
+  },
+  {
+    question: "Le référencement SEO est-il inclus dans la création du site ?",
+    answer:
+      "Oui, chaque site est livré avec les bases du référencement naturel : structure technique optimisée, balises title et meta, données structurées, sitemap, vitesse de chargement et configuration Google Search Console. Un accompagnement SEO avancé est proposé en option.",
+  },
+  {
+    question: "Quels services de data et d'intelligence artificielle proposez-vous ?",
+    answer:
+      "Je réalise des tableaux de bord Power BI, des pipelines de données (ETL), de l'analyse prédictive, des modèles de machine learning, du NLP et de la computer vision, ainsi que des déploiements cloud sur AWS et Azure.",
   },
 ];
 
-const projects = [
-  {
-    category: "data-science",
-    title: "Détection Fake News",
-    description:
-      "Application IA capable d'analyser vidéos et textes pour déterminer leur véracité. Déployée sur Azure avec Docker.",
-    tech: ["Python", "NLP", "Azure", "Docker"],
-  },
-  {
-    category: "data-science",
-    title: "Prédiction du Diabète",
-    description:
-      "Modèle ML prédictif pour anticiper les risques de diabète à partir de données cliniques.",
-    tech: ["Machine Learning", "Python", "Scikit-learn"],
-  },
-  {
-    category: "data-science",
-    title: "Analyse du Trafic Aérien",
-    description:
-      "Pipeline automatisé de collecte, transformation et chargement des données (ETL) avec restitution dans Power BI. Tableaux de bord modernes, KPIs opérationnels et design orienté décision.",
-    tech: ["Power BI", "ETL", "SQL", "DAX"],
-    gallery: ["/1.png", "/2.png", "/3.png", "/4.png"],
-  },
-  {
-    category: "development",
-    title: "Site Digital Porokhane",
-    description:
-      "Plateforme digitale moderne pour la présentation et gestion des services Porokhane.",
-    tech: ["React", "Node.js", "MongoDB"],
-    link: "https://digital-porokhane.com/",
-  },
-  {
-    category: "development",
-    title: "Site Mairie de Khombole",
-    description:
-      "Site web moderne pour la Mairie de Khombole avec gestion des services municipaux et informations citoyennes.",
-    tech: ["React", "Laravel", "MySQL"],
-    link: "https://mairiedekhombole.sn/",
-  },
-  {
-    category: "development",
-    title: "Site Saveur Deco",
-    description:
-      "Plateforme e-commerce moderne pour la décoration d'intérieur avec catalogue produits et interface utilisateur élégante.",
-    tech: ["React", "E-commerce", "Responsive"],
-    link: "https://saveurdeco.fr/",
-  },
-];
-
-const skills = [
-  {
-    title: "Data Science & IA",
-    items: [
-      { name: "Python, R, Scala", width: 85 },
-      { name: "Machine Learning", width: 90 },
-      { name: "Deep Learning", width: 80 },
-    ],
-  },
-  {
-    title: "Cloud & DevOps",
-    items: [
-      { name: "AWS Cloud", width: 75 },
-      { name: "Docker & Kubernetes", width: 90 },
-      { name: "CI/CD", width: 80 },
-    ],
-  },
-  {
-    title: "Développement",
-    items: [
-      { name: "Full Stack Development", width: 85 },
-      { name: "Bases de Données", width: 75 },
-      { name: "Data Visualization", width: 80 },
-    ],
-  },
-];
-
+// Articles mis en avant sur l'accueil : on privilégie les requêtes commerciales
+// locales, ce sont elles qui amènent des prospects (et elles reçoivent ainsi un
+// lien depuis la page la plus forte du site, ce qui accélère leur indexation).
 const articles = [
+  {
+    slug: "prix-site-web-dakar",
+    date: "28 Août 2026",
+    title: "Prix Création Site Web à Dakar : Combien Ça Coûte en 2026 ?",
+    description:
+      "Tarifs détaillés pour votre site internet au Sénégal : site vitrine, e-commerce, application métier.",
+    tags: ["prix création site web Dakar", "devis site internet Sénégal", "tarif site web"],
+  },
+  {
+    slug: "creation-site-web-dakar",
+    date: "28 Août 2026",
+    title: "Création de Site Web à Dakar et au Sénégal : le Guide Complet 2026",
+    description: "Toutes les étapes, les types de sites, les délais et les bonnes pratiques pour créer votre site web à Dakar.",
+    tags: ["création site web Dakar", "création site web Sénégal", "créer site vitrine Dakar"],
+  },
+  {
+    slug: "site-ecommerce-dakar",
+    date: "28 Août 2026",
+    title: "Création de Site E-commerce à Dakar : Vendre en Ligne au Sénégal",
+    description:
+      "Créez votre boutique en ligne avec paiements Wave, Orange Money et cartes bancaires au Sénégal.",
+    tags: ["e-commerce Sénégal", "boutique en ligne Dakar", "Wave & Orange Money"],
+  },
+  {
+    slug: "developpeur-freelance-dakar",
+    date: "28 Août 2026",
+    title: "Développeur Freelance à Dakar : Tarif Journalier, Modalités et Contrat",
+    description: "Combien coûte un développeur freelance à Dakar, comment se déroule la collaboration et quelles garanties exiger ?",
+    tags: ["développeur freelance Dakar", "tarif journalier développeur", "freelance ou agence"],
+  },
   {
     slug: "developpeur-web-senegal",
     date: "29 Juillet 2026",
-    title: "Développeur Web au Sénégal : Pourquoi Choisir un Expert Local ?",
-    description:
-      "Vous cherchez un développeur web au Sénégal ? Découvrez les avantages de travailler avec un développeur full stack à Dakar.",
-    tags: ["développeur web Sénégal", "développeur web Dakar", "création site web"],
-  },
-  {
-    slug: "data-scientist-senegal",
-    date: "29 Juillet 2026",
-    title: "Data Analyst et Data Scientist au Sénégal : Booster Vos Décisions",
-    description:
-      "Exploitez la puissance de vos données avec un Data Analyst ou Data Scientist au Sénégal.",
-    tags: ["Data Analyst Sénégal", "Data Scientist Sénégal", "intelligence artificielle"],
+    title: "Développeur Web au Sénégal : Comment Choisir un Expert Local à Dakar",
+    description: "Compétences à vérifier, technologies maîtrisées et avantages concrets de travailler avec un développeur full stack basé à Dakar.",
+    tags: ["développeur web Dakar", "développeur web Sénégal", "développeur full stack"],
   },
   {
     slug: "consultant-power-bi-senegal",
     date: "29 Juillet 2026",
     title: "Consultant Power BI au Sénégal : Visualisez Vos Performances",
-    description: "Un consultant Power BI au Sénégal vous aide à concevoir des tableaux de bord interactifs.",
+    description:
+      "Un consultant Power BI au Sénégal vous aide à concevoir des tableaux de bord interactifs.",
     tags: ["consultant Power BI Sénégal", "Business Intelligence", "dashboard"],
   },
+];
+
+// Services mis en avant : le développement web passe en premier, cohérent avec
+// le positionnement « Développeur Web à Dakar » du titre et du H1.
+const services = [
   {
-    slug: "ia-afrique",
-    date: "15 Janvier 2024",
-    title: "L'Avenir de l'Intelligence Artificielle en Afrique",
+    id: "dev",
+    title: "Sites web & applications",
     description:
-      "Opportunités, défis et cas d'usage concrets pour accélérer la transformation numérique du continent.",
-    tags: ["IA", "Innovation", "Stratégie"],
+      "Sites vitrines, boutiques en ligne avec Wave et Orange Money, applications métier sur mesure. Rapides sur mobile, pensés pour convertir et bien référencés sur Google.",
+    features: ["Next.js & React", "Laravel", "E-commerce", "SEO"],
   },
   {
-    slug: "power-bi-dashboards",
-    date: "12 Janvier 2024",
-    title: "Comment Créer des Tableaux de Bord Efficaces avec Power BI",
+    id: "ai",
+    title: "Intelligence Artificielle",
     description:
-      "De la modélisation des données au storytelling visuel: bonnes pratiques et checklists professionnelles.",
-    tags: ["Data Viz", "Power BI", "BI"],
+      "Modèles de machine learning, NLP et computer vision pour automatiser vos processus et transformer vos données en décisions.",
+    features: ["Machine Learning", "NLP", "Computer Vision"],
   },
   {
-    slug: "aws-migration-guide",
-    date: "08 Janvier 2024",
-    title: "Migration vers AWS : Guide Complet pour les Entreprises",
+    id: "data",
+    title: "Data Analytics & BI",
     description:
-      "Stratégies et étapes clés pour réussir votre migration cloud. De la planification au déploiement, découvrez les meilleures pratiques.",
-    tags: ["AWS", "Cloud", "DevOps"],
+      "Tableaux de bord Power BI, pipelines ETL et analyse prédictive pour piloter votre activité avec des chiffres fiables.",
+    features: ["Power BI", "ETL & SQL", "Analyse prédictive"],
   },
+  {
+    id: "cloud",
+    title: "Cloud & DevOps",
+    description:
+      "Architecture AWS, conteneurisation Docker et déploiements automatisés pour des applications fiables et évolutives.",
+    features: ["AWS", "Docker & Kubernetes", "CI/CD"],
+  },
+];
+
+const stack = [
+  "Next.js", "React", "TypeScript", "Laravel", "Node.js", "Python", "SQL",
+  "Power BI", "TensorFlow", "AWS", "Azure", "Docker", "Flutter", "MySQL",
+];
+
+const toolbox = [
+  { title: "Développement", items: ["React", "Next.js", "TypeScript", "Laravel", "PHP", "Node.js", "Flutter", "MySQL", "PostgreSQL"] },
+  { title: "Data & IA", items: ["Python", "R", "SQL", "Scikit-learn", "TensorFlow", "NLP", "Power BI", "DAX", "ETL"] },
+  { title: "Cloud & DevOps", items: ["AWS", "Azure", "Docker", "Kubernetes", "CI/CD", "Terraform", "Linux", "Git"] },
+];
+
+const facts = [
+  { label: "Formation", value: "Master IA & Big Data", detail: "Université Cheikh Anta Diop" },
+  { label: "Certification", value: "AWS", detail: "Sonatel Academy · 2024" },
+  { label: "Expérience", value: "Data Analyst", detail: "Aéroport de Dakar-Yoff" },
+  { label: "Aujourd'hui", value: "Full Stack & Data", detail: "Porokhane Digital Consulting" },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
-      <section id="home" className="hero relative overflow-hidden">
-        <div className="hero-glow" />
-        <div className="max-w-[1200px] mx-auto px-5 w-full relative z-10 py-12">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div className="animate-fade-in-up">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
-                Bonjour, je suis{" "}
-                <span className="highlight">Samba SY</span>
+      {/* ───────────── Hero ───────────── */}
+      <section id="home" className="relative overflow-hidden">
+        <div className="t-diamond-bg absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_70%_40%,black,transparent_70%)]" aria-hidden="true" />
+        <div className="max-w-[1240px] mx-auto px-5 relative z-10 pt-14 pb-16 lg:pt-20 lg:pb-20">
+          <div className="grid lg:grid-cols-[1.25fr_1fr] gap-14 lg:gap-20 items-center">
+            <div>
+              <h1 className="animate-fade-in-up delay-1">
+                <span className="block text-lg md:text-xl font-bold tracking-wide text-text-secondary mb-4">
+                  Samba SY
+                </span>
+                <span className="t-display block text-[3.4rem] sm:text-7xl lg:text-[5.6rem]">
+                  Développeur Web <em>à&nbsp;Dakar</em>
+                </span>
               </h1>
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 bg-gradient-to-r from-[var(--accent-color)] to-[#8b5cf6] bg-clip-text text-transparent">
-                DATA SCIENTIST · DATA ANALYST · DÉVELOPPEUR FULL STACK & IA
+
+              <h2 className="mt-7 text-sm md:text-base font-bold tracking-[0.18em] uppercase text-text-muted animate-fade-in-up delay-2">
+                Développeur Full Stack · Data Scientist · IA
               </h2>
-              <p className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 leading-relaxed max-w-2xl">
-                Passionné par l'Intelligence Artificielle et les technologies cloud, je transforme les données en
-                solutions innovantes. Expert en Machine Learning, AWS Cloud et DevOps, je crée des applications
-                intelligentes qui révolutionnent les processus métier.
+
+              <p className="mt-6 text-lg md:text-xl text-text-secondary leading-relaxed max-w-xl animate-fade-in-up delay-2">
+                Basé à Dakar, je crée des sites web, des boutiques en ligne et des applications métier
+                pour les entreprises du Sénégal et d'ailleurs. Certifié AWS, expert en IA et data,
+                je conçois des solutions rapides, fiables et pensées pour convertir.
               </p>
-              <div className="flex flex-wrap gap-4 mb-12">
+
+              <div className="mt-10 flex flex-wrap items-center gap-4 animate-fade-in-up delay-3">
                 <Link href="/projects" className="btn-primary">
-                  Voir mes Projets
+                  Voir mes projets <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
                 </Link>
-                <a href="/CV_Samba_SY.pdf" download className="btn-secondary">
-                  <i className="fas fa-download"></i> Télécharger CV
+                <a href="https://wa.me/221773784814" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                  <i className="fab fa-whatsapp" aria-hidden="true" /> Discutons sur WhatsApp
+                </a>
+                <a href="/CV_Samba_SY.pdf" download className="text-sm font-bold text-text-secondary hover:text-accent underline underline-offset-4 decoration-border-color transition-colors">
+                  Télécharger le CV
                 </a>
               </div>
-              <div className="flex flex-wrap gap-8 md:gap-12">
-                <div className="stat text-center">
-                  <h3 className="text-3xl md:text-4xl">26</h3>
-                  <p className="text-[var(--text-secondary)] text-sm mt-1">Projets IA</p>
-                </div>
-                <div className="stat text-center">
-                  <h3 className="text-3xl md:text-4xl">3+</h3>
-                  <p className="text-[var(--text-secondary)] text-sm mt-1">Années d'expérience</p>
-                </div>
-                <div className="stat text-center">
-                  <h3 className="text-3xl md:text-4xl">AWS</h3>
-                  <p className="text-[var(--text-secondary)] text-sm mt-1">Certifié</p>
-                </div>
-              </div>
+
+              <dl className="mt-14 grid grid-cols-3 max-w-lg border-t border-border-color animate-fade-in-up delay-4">
+                {[
+                  { n: "25+", l: "Projets livrés" },
+                  { n: "3+", l: "Années d'expérience" },
+                  { n: "AWS", l: "Certifié" },
+                ].map((s, i) => (
+                  <div key={s.l} className={`pt-5 ${i ? "pl-5 border-l border-border-color" : ""}`}>
+                    <dt className="sr-only">{s.l}</dt>
+                    <dd className="font-display text-4xl md:text-5xl font-medium">{s.n}</dd>
+                    <dd className="text-xs md:text-sm text-text-muted mt-1">{s.l}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
-            <div className="hero-profile-wrapper w-80 h-80 md:w-[22rem] md:h-[22rem] lg:w-[26rem] lg:h-[26rem] xl:w-[30rem] xl:h-[30rem] animate-fade-in-up delay-2 mx-auto lg:ml-auto lg:mr-0 lg:pl-12">
-              <div className="hero-profile-ring"></div>
-              <div className="hero-profile-particles"></div>
-              <div className="hero-profile-image w-full h-full">
+            {/* Portrait en arche, soleil couchant sur l'Atlantique */}
+            <div className="relative mx-auto w-full max-w-[420px] animate-fade-in-up delay-2">
+              <div className="t-sun w-[62%] aspect-square -top-6 -right-8" aria-hidden="true" />
+              <div className="t-arch">
                 <Image
-                  src="/image.jpg"
-                  alt="Samba SY Profile"
+                  src="/portrait.webp"
+                  alt="Samba SY, développeur web à Dakar"
                   fill
-                  className="object-cover rounded-full"
                   priority
                   fetchPriority="high"
-                  sizes="(max-width: 768px) 90vw, 600px"
+                  sizes="(max-width: 1024px) 90vw, 420px"
+                  className="object-cover object-bottom"
                 />
+                <div className="t-weave absolute bottom-0 left-0 right-0" aria-hidden="true" />
+              </div>
+              <VideoPopup />
+
+              <div className="t-float-card left-3 md:-left-12 bottom-16 px-5 py-4 flex items-center gap-3">
+                <span className="t-pulse" aria-hidden="true" />
+                <div>
+                  <p className="text-sm font-bold leading-tight">Disponible</p>
+                  <p className="text-xs text-text-muted">pour de nouveaux projets</p>
+                </div>
+              </div>
+
+              <div className="t-float-card right-3 md:-right-8 top-[38%] px-4 py-3 text-center">
+                <p className="font-display text-2xl leading-none text-accent">5,0</p>
+                <p className="text-[10px] tracking-wider uppercase text-text-muted mt-1">
+                  <i className="fab fa-google" aria-hidden="true" /> Avis
+                </p>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="scroll-indicator hidden lg:block">
-          <div className="scroll-arrow"></div>
-        </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-[var(--dark-surface)]">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="section-title text-left mb-8">À Propos de Moi</h2>
-              <p className="text-[var(--text-secondary)] mb-4">
+      {/* ───────────── Stack défilante ───────────── */}
+      <div className="border-y border-border-color bg-dark-surface py-5 overflow-hidden" aria-label="Technologies maîtrisées">
+        <div className="t-marquee">
+          {[...stack, ...stack].map((t, i) => (
+            <span key={i} className="flex items-center gap-10 pr-10 font-display text-2xl md:text-3xl italic text-text-secondary whitespace-nowrap">
+              {t}
+              <span className="w-2 h-2 rotate-45 bg-[var(--terracotta)] not-italic" aria-hidden="true" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ───────────── À propos ───────────── */}
+      <section id="about" className="py-24 lg:py-32">
+        <div className="max-w-[1240px] mx-auto px-5 grid lg:grid-cols-[1.3fr_1fr] gap-16 items-start">
+          <div>
+            <p className="t-label"><b>01</b> À propos</p>
+            <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6">
+              De la donnée <em>au produit fini.</em>
+            </h2>
+            <div className="mt-8 space-y-5 text-lg text-text-secondary leading-relaxed max-w-2xl">
+              <p>
                 Passionné par l'exploration des données, le cloud computing, les pratiques DevOps et le développement
                 logiciel, je suis un data scientist avec une expertise croissante dans l'analyse de données, la
                 conception de solutions cloud et le développement web.
               </p>
-              <p className="text-[var(--text-secondary)] mb-4">
-                Maîtrisant les langages comme <strong>Python, R, SQL, Java</strong>, ainsi que des technologies web
-                telles que <strong>HTML, CSS, JavaScript et PHP</strong>, j'excelle dans l'analyse exploratoire des
-                données, la modélisation prédictive, et le développement d'applications web robustes.
+              <p>
+                Maîtrisant les langages comme <strong className="text-text-primary">Python, R, SQL, Java</strong>, ainsi que des
+                technologies web telles que <strong className="text-text-primary">HTML, CSS, JavaScript et PHP</strong>, j'excelle
+                dans l'analyse exploratoire des données, la modélisation prédictive, et le développement d'applications
+                web robustes.
               </p>
-              <p className="text-[var(--text-secondary)] mb-8">
+              <p>
                 Mon parcours polyvalent me permet de combiner des compétences en data science, en développement
                 logiciel et en cloud computing pour créer des solutions innovantes, performantes et adaptées aux
                 besoins des utilisateurs.
               </p>
-
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                  <i className="fas fa-graduation-cap text-[var(--accent-color)]"></i>
-                  <span>Master IA & Big Data</span>
-                </div>
-                <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                  <i className="fas fa-cloud text-[var(--accent-color)]"></i>
-                  <span>Certifié AWS</span>
-                </div>
-                <div className="flex items-center gap-2 text-[var(--text-secondary)]">
-                  <i className="fas fa-code text-[var(--accent-color)]"></i>
-                  <span>Full Stack Developer</span>
-                </div>
-              </div>
-
-              <Link href="/about" className="btn-primary">
-                En Savoir Plus
-              </Link>
             </div>
+            <Link href="/about" className="btn-secondary mt-10">
+              Mon parcours complet <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+            </Link>
+          </div>
 
-            <div className="profile-card">
-              <div className="ai-avatar">
-                <i className="fas fa-user-astronaut"></i>
-              </div>
-              <h3 className="text-xl font-bold mb-1">Samba SY</h3>
-              <p className="text-[var(--text-secondary)] mb-6">Data Scientist | Cloud & DevOps Expert</p>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <span className="number">3+</span>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">Années d'expérience</p>
-                </div>
-                <div className="text-center">
-                  <span className="number">26</span>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">Projets réalisés</p>
-                </div>
-                <div className="text-center">
-                  <span className="number">5+</span>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">Certifications</p>
-                </div>
-              </div>
+          <div className="bg-dark-card border border-border-color rounded-[28px] overflow-hidden shadow-[var(--shadow-lg)]">
+            <div className="t-weave" aria-hidden="true" />
+            <div className="p-8">
+              <p className="t-label">Fiche</p>
+              <dl className="mt-6 divide-y divide-[var(--border-color)]">
+                {facts.map((f) => (
+                  <div key={f.label} className="py-5 grid grid-cols-[110px_1fr] gap-4">
+                    <dt className="text-xs font-bold uppercase tracking-wider text-text-muted pt-1">{f.label}</dt>
+                    <dd>
+                      <p className="font-display text-xl">{f.value}</p>
+                      <p className="text-sm text-text-secondary">{f.detail}</p>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section id="services-preview" className="py-20">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <h2 className="section-title">Mes Services</h2>
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {services.map((service) => (
-              <div key={service.title} className="service-card">
-                <div className="h-36 w-full rounded-2xl overflow-hidden mb-4 border border-[var(--border-color)]">
-                  <ServiceCover id={service.id} title={service.title} />
-                </div>
-                <div className="service-icon">
-                  <i className={`fas ${service.icon}`}></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                <p className="text-[var(--text-secondary)] mb-5">{service.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {service.features.map((feature) => (
-                    <span key={feature} className="text-sm text-[var(--accent-color)] flex items-center gap-1">
-                      <i className="fas fa-check text-xs"></i> {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link href="/services" className="btn-primary">
-              Voir Tous les Services
+      {/* ───────────── Services ───────────── */}
+      <section id="services-preview" className="py-24 lg:py-32 bg-dark-surface">
+        <div className="max-w-[1240px] mx-auto px-5">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+            <div>
+              <p className="t-label"><b>02</b> Services</p>
+              <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6">
+                Ce que je <em>construis.</em>
+              </h2>
+            </div>
+            <Link href="/services" className="btn-secondary self-start md:self-auto">
+              Tous les services <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </Link>
           </div>
+
+          <div>
+            {services.map((s, i) => (
+              <Link
+                key={s.id}
+                href={`/services#${s.id}`}
+                className="t-row grid-cols-[auto_1fr_auto] md:grid-cols-[80px_minmax(0,1fr)_minmax(0,1.3fr)_auto] gap-x-6 md:gap-x-10 gap-y-3 items-center py-8 md:py-10 px-2 md:px-4"
+              >
+                <span className="font-display italic text-2xl md:text-3xl text-accent">0{i + 1}</span>
+                <h3 className="font-display text-2xl md:text-[2.1rem] leading-tight font-normal">{s.title}</h3>
+                <div className="col-span-3 row-start-2 md:col-span-1 md:row-start-1 md:col-start-3">
+                  <p className="text-text-secondary leading-relaxed">{s.description}</p>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                    {s.features.map((f) => (
+                      <span key={f} className="text-xs font-bold uppercase tracking-wider text-text-muted">{f}</span>
+                    ))}
+                  </div>
+                </div>
+                <span className="t-arrow row-start-1 col-start-3 md:col-start-4" aria-hidden="true">
+                  <i className="fas fa-arrow-right text-sm" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <nav className="mt-10 flex flex-wrap items-center gap-2" aria-label="Solutions par besoin">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted mr-2">Solutions</span>
+            <Link href="/application-mobile-dakar/" className="t-chip">Application mobile à Dakar</Link>
+            <Link href="/logiciel-gestion-stock-senegal/" className="t-chip">Logiciel de gestion de stock</Link>
+            <Link href="/logiciel-gestion-scolaire-senegal/" className="t-chip">Logiciel de gestion scolaire</Link>
+            <Link href="/site-web-association-senegal/" className="t-chip">Site web pour association</Link>
+          </nav>
         </div>
       </section>
 
@@ -363,25 +369,20 @@ export default function Home() {
 
       <Testimonials />
 
-      {/* Skills */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <h2 className="section-title">Compétences Techniques</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {skills.map((category) => (
-              <div key={category.title} className="bg-[var(--dark-card)] border border-[var(--border-color)] rounded-2xl p-6">
-                <h3 className="text-lg font-semibold mb-6">{category.title}</h3>
-                <div className="space-y-5">
-                  {category.items.map((item) => (
-                    <div key={item.name}>
-                      <div className="flex justify-between mb-2 text-sm">
-                        <span>{item.name}</span>
-                        <span className="text-[var(--accent-color)]">{item.width}%</span>
-                      </div>
-                      <div className="skill-bar">
-                        <div className="skill-progress" style={{ width: `${item.width}%` }}></div>
-                      </div>
-                    </div>
+      {/* ───────────── Boîte à outils ───────────── */}
+      <section className="py-24 lg:py-32">
+        <div className="max-w-[1240px] mx-auto px-5">
+          <p className="t-label"><b>05</b> Compétences techniques</p>
+          <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6 mb-14">
+            Ma <em>boîte à outils.</em>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-10">
+            {toolbox.map((group) => (
+              <div key={group.title} className="border-t-2 border-[var(--terracotta)] pt-6">
+                <h3 className="font-display text-2xl mb-5">{group.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span key={item} className="t-chip">{item}</span>
                   ))}
                 </div>
               </div>
@@ -390,92 +391,95 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog Preview */}
-      <section id="blog-preview" className="py-20 bg-[var(--dark-surface)]">
-        <div className="max-w-[1200px] mx-auto px-5">
-          <h2 className="section-title">Derniers Articles</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {/* ───────────── Articles ───────────── */}
+      <section id="blog-preview" className="py-24 lg:py-32 bg-dark-surface">
+        <div className="max-w-[1240px] mx-auto px-5">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+            <div>
+              <p className="t-label"><b>06</b> Journal</p>
+              <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6">
+                Derniers <em>articles.</em>
+              </h2>
+            </div>
+            <Link href="/blog" className="btn-secondary self-start md:self-auto">
+              Tous les articles <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div>
             {articles.map((article) => (
-              <article key={article.slug} className="project-card">
-                <div className="project-image relative">
-                  <BlogCover slug={article.slug} title={article.title} category={article.tags[0]} className="object-cover" />
-                  <div className="project-overlay z-10">
-                    <Link href="/blog" className="project-link">
-                      <i className="fas fa-book-open"></i>
+              <article key={article.slug} className="t-row md:grid-cols-[160px_1fr_auto] gap-x-8 gap-y-2 items-center py-7 px-2 md:px-4">
+                <p className="text-xs font-bold uppercase tracking-wider text-text-muted">{article.date}</p>
+                <div>
+                  <h3 className="font-display text-xl md:text-2xl font-normal leading-snug">
+                    <Link href={`/blog/${article.slug}/`} className="after:absolute after:inset-0">
+                      {article.title}
                     </Link>
-                  </div>
+                  </h3>
+                  <p className="text-text-secondary text-sm mt-2 max-w-2xl">{article.description}</p>
                 </div>
-                <div className="p-6">
-                  <p className="text-[var(--text-muted)] text-sm mb-2 flex items-center gap-2">
-                    <i className="fas fa-calendar text-xs"></i> {article.date}
-                  </p>
-                  <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
-                  <p className="text-[var(--text-secondary)] text-sm mb-4">{article.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
+                <span className="t-arrow hidden md:inline-flex" aria-hidden="true">
+                  <i className="fas fa-arrow-right text-sm" />
+                </span>
               </article>
             ))}
           </div>
-          <div className="text-center">
-            <Link href="/blog" className="btn-primary">
-              Voir Tous les Articles
+        </div>
+      </section>
+
+      {/* ───────────── Appel à l'action ───────────── */}
+      <section className="relative bg-[var(--terracotta)] text-[#fff8ef] overflow-hidden">
+        <div className="t-weave" aria-hidden="true" />
+        <div className="t-sun w-[520px] aspect-square -right-40 -bottom-64 opacity-40" aria-hidden="true" />
+        <div className="max-w-[1240px] mx-auto px-5 py-24 lg:py-28 relative">
+          <h2 className="t-display text-4xl md:text-6xl lg:text-7xl max-w-4xl [&_em]:!text-[var(--ink)]">
+            Un projet de site ou d'application <em>à Dakar ?</em>
+          </h2>
+          <p className="mt-6 text-lg md:text-xl text-[#fff8ef]/85 max-w-2xl">
+            Décrivez-moi votre besoin : je réponds sous 24h avec un premier avis et une estimation.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link href="/devis" className="btn-primary !bg-[var(--ink)] hover:!bg-black uppercase tracking-[0.08em]">
+              Demander un devis <i className="fas fa-arrow-right text-xs" aria-hidden="true" />
             </Link>
+            <a href="https://wa.me/221773784814" target="_blank" rel="noopener noreferrer" className="btn-secondary !border-[#fff8ef]/70 !text-[#fff8ef] hover:!bg-[#fff8ef] hover:!text-[var(--terracotta)]">
+              <i className="fab fa-whatsapp" aria-hidden="true" /> +221 77 378 48 14
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="contact-cta">
-        <div className="max-w-[800px] mx-auto px-5">
-          <h2>Prêt à Transformer Vos Données en Solutions Intelligentes ?</h2>
-          <p>Discutons de votre projet et créons ensemble des solutions IA innovantes</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn-primary">
-              Me Contacter
-            </Link>
-            <Link href="/devis" className="btn-secondary">
-              Demander un Devis
-            </Link>
+      {/* ───────────── FAQ ───────────── */}
+      <section id="faq" className="py-24 lg:py-32">
+        <div className="max-w-[1240px] mx-auto px-5 grid lg:grid-cols-[1fr_1.6fr] gap-14">
+          <div>
+            <p className="t-label"><b>07</b> FAQ</p>
+            <h2 className="t-display text-4xl md:text-5xl mt-6">
+              Questions <em>fréquentes.</em>
+            </h2>
+            <p className="mt-6 text-text-secondary">
+              Une autre question ?{" "}
+              <Link href="/contact" className="text-accent font-bold underline underline-offset-4">Écrivez-moi</Link>.
+            </p>
+          </div>
+          <div>
+            {faqs.map((faq) => (
+              <details key={faq.question} className="t-faq border-t border-border-color last:border-b py-6">
+                <summary className="flex items-start justify-between gap-6">
+                  <span className="font-display text-xl md:text-2xl">{faq.question}</span>
+                  <span className="t-plus t-arrow !w-10 !h-10" aria-hidden="true">
+                    <i className="fas fa-plus text-xs" />
+                  </span>
+                </summary>
+                <p className="text-text-secondary mt-4 leading-relaxed max-w-2xl">{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: "Samba SY",
-            image: "https://sambasy.com/profil.png",
-            logo: "https://sambasy.com/logo.png",
-            telephone: "+221 77 378 48 14",
-            email: "sambasy837@gmail.com",
-            url: "https://sambasy.com",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Dakar",
-              addressCountry: "SN",
-            },
-            areaServed: "Sénégal",
-            serviceType: [
-              "Développement web",
-              "Data Science",
-              "Intelligence Artificielle",
-              "Business Intelligence",
-              "Consulting SEO",
-            ],
-            description:
-              "Développeur web full stack, Data Scientist, Data Analyst et consultant Power BI au Sénégal. Création de sites web, applications mobiles et solutions IA à Dakar.",
-            priceRange: "$$",
-          }),
-        }}
-      />
-    <SEOLocalSection page="home" />
+      <JsonLd data={faqSchema(faqs)} />
+      <SEOLocalSection page="home" />
     </>
   );
 }

@@ -33,52 +33,63 @@ export default function Testimonials() {
       .slice(0, 2)
       .join("");
 
+  const [featured, ...others] = testimonials;
+
+  const Stars = ({ n }: { n: number }) => (
+    <div className="flex gap-1 text-[var(--ochre)]" aria-label={`${n} étoiles sur 5`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <i key={i} className={`fas fa-star text-xs ${i < n ? "" : "opacity-25"}`} aria-hidden="true" />
+      ))}
+    </div>
+  );
+
+  const Author = ({ t }: { t: (typeof testimonials)[0] }) => (
+    <div className="flex items-center gap-3">
+      <div className="w-11 h-11 rounded-full bg-[var(--ocean)] flex items-center justify-center text-[#fff8ef] font-bold text-sm">
+        {initial(t.name)}
+      </div>
+      <div>
+        <p className="font-bold text-sm">{t.name}</p>
+        <p className="text-xs text-text-muted">
+          <i className="fab fa-google" aria-hidden="true" /> Avis Google · {t.time}
+        </p>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="py-24 bg-gradient-to-b from-dark-surface to-dark-bg">
-      <div className="max-w-[1200px] mx-auto px-5">
-        <div className="text-center mb-14">
-          <span className="text-sm font-medium text-accent tracking-wide uppercase">Témoignages</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Ce que disent mes clients</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            Retours authentiques laissés sur Google par les clients et collaborateurs de Samba SY.
-          </p>
-        </div>
+    <section className="py-24 lg:py-32 bg-dark-surface relative overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-5">
+        <p className="t-label"><b>04</b> Témoignages</p>
+        <h2 className="t-display text-4xl md:text-5xl lg:text-6xl mt-6 mb-14">
+          Ce que disent <em>mes clients.</em>
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="relative bg-dark-card border border-border-color rounded-3xl p-6 shadow-lg hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_25px_60px_rgba(0,0,0,0.45)] transition-all duration-300"
-            >
-              <div className="absolute -top-4 left-6 w-10 h-10 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center text-accent text-lg">
-                <i className="fas fa-quote-left" />
-              </div>
+        <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-16 items-start">
+          <figure className="relative">
+            <span className="font-display text-[9rem] leading-[0.6] text-[var(--terracotta)] block select-none" aria-hidden="true">
+              &ldquo;
+            </span>
+            <blockquote className="font-display text-2xl md:text-[2.1rem] leading-snug font-light mt-2">
+              {featured.text}
+            </blockquote>
+            <figcaption className="mt-8 flex flex-wrap items-center gap-6">
+              <Author t={featured} />
+              <Stars n={featured.rating} />
+            </figcaption>
+          </figure>
 
-              <div className="flex justify-center gap-1 mb-4 mt-4">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <i
-                    key={i}
-                    className={`fas fa-star text-xs ${i < t.rating ? "text-yellow-400" : "text-text-muted"}`}
-                  />
-                ))}
-              </div>
-
-              <p className="text-center text-text-primary leading-relaxed mb-6 min-h-[120px]">
-                &ldquo;{t.text}&rdquo;
-              </p>
-
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-base mb-3">
-                  {initial(t.name)}
-                </div>
-                <h4 className="font-semibold text-sm">{t.name}</h4>
-                <p className="text-xs text-text-muted mb-2">{t.time}</p>
-                <span className="inline-flex items-center gap-1 text-[10px] text-accent bg-accent/10 border border-accent/20 px-2 py-1 rounded-full">
-                  <i className="fab fa-google" /> Avis vérifié Google
-                </span>
-              </div>
-            </div>
-          ))}
+          <div className="space-y-5">
+            {others.map((t) => (
+              <figure key={t.name} className="bg-dark-card border border-border-color rounded-[22px] p-6">
+                <Stars n={t.rating} />
+                <blockquote className="mt-3 text-text-primary leading-relaxed">&ldquo;{t.text}&rdquo;</blockquote>
+                <figcaption className="mt-5">
+                  <Author t={t} />
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,11 @@
 const testimonials = [
   {
+    name: "ASC Khombole",
+    rating: 5,
+    text: "L\u2019ASC KHOMBOLE tient désormais son site officiel !\n\nGrâce à son expertise, son professionnalisme et sa réactivité, Samba a réussi à concevoir le site officiel de l\u2019ASC Khombole, club évoluant en National 2, dans un délai record.\n\nUn travail remarquable qui témoigne de son savoir-faire, de son engagement et de sa maîtrise du numérique. Ce site représente une nouvelle étape dans la modernisation et la visibilité de notre club. Il permettra aux supporters, partenaires et passionnés de football de suivre de plus près l\u2019actualité de l\u2019ASC Khombole.\n\nUn grand merci à Samba pour cette belle réalisation !",
+    time: "il y a quelques jours",
+  },
+  {
     name: "Hamidou DRAME",
     rating: 5,
     text: "Une collaboration remarquable ! Je tiens à remercier M. Samba Sy pour la qualité exceptionnelle de son travail. Son professionnalisme, sa créativité et son sens du détail ont largement dépassé mes attentes. Ce fut un réel plaisir de travailler ensemble et je recommande vivement ses services.",
@@ -70,7 +76,7 @@ export default function Testimonials() {
             <span className="font-display text-[9rem] leading-[0.6] text-[var(--terracotta)] block select-none" aria-hidden="true">
               &ldquo;
             </span>
-            <blockquote className="font-display text-2xl md:text-[2.1rem] leading-snug font-light mt-2">
+            <blockquote className="font-display text-2xl md:text-[2.1rem] leading-snug font-light mt-2 whitespace-pre-line">
               {featured.text}
             </blockquote>
             <figcaption className="mt-8 flex flex-wrap items-center gap-6">
@@ -83,7 +89,7 @@ export default function Testimonials() {
             {others.map((t) => (
               <figure key={t.name} className="bg-dark-card border border-border-color rounded-[22px] p-6">
                 <Stars n={t.rating} />
-                <blockquote className="mt-3 text-text-primary leading-relaxed">&ldquo;{t.text}&rdquo;</blockquote>
+                <blockquote className="mt-3 text-text-primary leading-relaxed whitespace-pre-line">&ldquo;{t.text}&rdquo;</blockquote>
                 <figcaption className="mt-5">
                   <Author t={t} />
                 </figcaption>

@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import ProjectModal from "@/components/ProjectModal";
-import ProjectCover from "@/components/ProjectCover";
+import LaptopMock from "@/components/LaptopMock";
 import PageHero from "@/components/PageHero";
 
 const filters = [
@@ -14,9 +13,6 @@ const filters = [
   { key: "web", label: "Développement Web" },
   { key: "dashboard", label: "Tableaux de Bord" },
 ];
-
-/** Domaine affiché dans la barre du cadre navigateur. */
-const domainOf = (link?: string) => (link ? new URL(link).hostname.replace(/^www\./, "") : null);
 
 export const projects = [
   {
@@ -1172,37 +1168,15 @@ export default function ProjectsContent() {
               <article key={project.id} className="group">
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="block w-full text-left rounded-[22px] border border-border-color bg-dark-surface overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--terracotta)_50%,transparent)]"
+                  className="block w-full text-left rounded-[22px] border border-border-color overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--terracotta)_50%,transparent)]"
                   aria-label={`Voir les détails de ${project.title}`}
                 >
-                  {/* Barre navigateur : pastilles + domaine + flèche */}
-                  <div className="flex items-center gap-1.5 px-4 h-9 border-b border-border-color">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--terracotta)]/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--ochre)]/70" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[var(--ocean)]/70" />
-                    <span className="ml-2.5 flex-1 min-w-0 text-[11px] text-text-muted truncate inline-flex items-center gap-1.5">
-                      <i className="fas fa-lock text-[9px] opacity-60" aria-hidden="true" />
-                      {domainOf(project.link) ?? (project.category.includes("dashboard") ? "tableau de bord" : project.category === "ai" ? "modèle IA" : "application web")}
-                    </span>
-                    <span className="t-arrow !w-7 !h-7 text-text-primary transition-all duration-300 group-hover:!bg-[var(--terracotta)] group-hover:text-[#fff8ef] group-hover:-rotate-45">
-                      <i className="fas fa-arrow-right text-[11px]" aria-hidden="true" />
-                    </span>
-                  </div>
-                  {/* Capture du site */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    {project.image ? (
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover object-left-top origin-top-left transition-transform duration-700 group-hover:scale-[1.04]"
-                        loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <ProjectCover id={project.id} title={project.title} />
-                    )}
-                  </div>
+                  <LaptopMock
+                    image={project.image}
+                    title={project.title}
+                    projectId={project.id}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </button>
 
                 <div className="pt-6">

@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import ProjectModal from "@/components/ProjectModal";
-import ProjectCover from "@/components/ProjectCover";
+import LaptopMock from "@/components/LaptopMock";
 import ImageLightbox from "@/components/ImageLightbox";
 import { projects as allProjects } from "@/components/ProjectsContent";
 
@@ -24,9 +23,6 @@ const isWeb = (category: string) => category.split(" ").some((c) => c === "web" 
 const projects = allProjects
   .filter((p) => featuredIds.includes(p.id))
   .sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
-
-/** Domaine affiché dans la barre du cadre navigateur. */
-const domainOf = (link?: string) => (link ? new URL(link).hostname.replace(/^www\./, "") : null);
 
 export default function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
@@ -57,7 +53,6 @@ export default function FeaturedProjects() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {projects.map((project) => {
-            const domain = domainOf(project.link);
             return (
               <article
                 key={project.id}
@@ -73,34 +68,19 @@ export default function FeaturedProjects() {
                   className="block text-left p-3 pb-0"
                   aria-label={`Voir les détails du projet ${project.title}`}
                 >
-                  <div className="rounded-t-[14px] overflow-hidden border border-b-0 border-border-color bg-dark-surface">
-                    <div className="flex items-center gap-1.5 px-3 h-7 border-b border-border-color">
-                      <span className="w-2 h-2 rounded-full bg-[var(--terracotta)]/70" />
-                      <span className="w-2 h-2 rounded-full bg-[var(--ochre)]/70" />
-                      <span className="w-2 h-2 rounded-full bg-[var(--ocean)]/70" />
-                      <span className="ml-2 text-[10px] text-text-muted truncate">
-                        {domain ?? (isWeb(project.category) ? "application web" : "tableau de bord")}
+                  {/* Capture dans un écran de laptop */}
+                  <div className="relative rounded-[14px] overflow-hidden border border-border-color">
+                    <LaptopMock
+                      image={project.image}
+                      title={project.title}
+                      projectId={project.id}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                    />
+                    {project.id === "montrajetjoj" && (
+                      <span className="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1.5 rounded-full bg-[var(--terracotta)] text-[#fff8ef] shadow-[var(--shadow-md)]">
+                        Projet phare · JOJ Dakar 2026
                       </span>
-                    </div>
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      {project.id === "montrajetjoj" && (
-                        <span className="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1.5 rounded-full bg-[var(--terracotta)] text-[#fff8ef] shadow-[var(--shadow-md)]">
-                          Projet phare · JOJ Dakar 2026
-                        </span>
-                      )}
-                      {project.image ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover object-left-top origin-top-left transition-transform duration-700 group-hover:scale-[1.03]"
-                          loading="lazy"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                        />
-                      ) : (
-                        <ProjectCover id={project.id} title={project.title} />
-                      )}
-                    </div>
+                    )}
                   </div>
                 </button>
 

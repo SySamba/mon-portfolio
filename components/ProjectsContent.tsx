@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import ProjectModal from "@/components/ProjectModal";
-import LaptopMock from "@/components/LaptopMock";
+import ProjectCover from "@/components/ProjectCover";
 import PageHero from "@/components/PageHero";
 
 const filters = [
@@ -1168,15 +1169,24 @@ export default function ProjectsContent() {
               <article key={project.id} className="group">
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="block w-full text-left rounded-[22px] border border-border-color overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--terracotta)_50%,transparent)]"
+                  className="relative block w-full aspect-[16/11] overflow-hidden rounded-[22px] border border-border-color transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--terracotta)_50%,transparent)]"
                   aria-label={`Voir les détails de ${project.title}`}
                 >
-                  <LaptopMock
-                    image={project.image}
-                    title={project.title}
-                    projectId={project.id}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                  {project.image ? (
+                    <Image
+                      src={`/projects/mocks/${project.id}.webp`}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <ProjectCover id={project.id} title={project.title} />
+                  )}
+                  <span className="absolute top-4 right-4 t-arrow !w-10 !h-10 !bg-dark-card/80 backdrop-blur text-white transition-all duration-300 group-hover:!bg-[var(--terracotta)] group-hover:-rotate-45">
+                    <i className="fas fa-arrow-right text-sm" aria-hidden="true" />
+                  </span>
                 </button>
 
                 <div className="pt-6">

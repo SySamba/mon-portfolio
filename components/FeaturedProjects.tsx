@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import ProjectModal from "@/components/ProjectModal";
-import LaptopMock from "@/components/LaptopMock";
+import ProjectCover from "@/components/ProjectCover";
 import ImageLightbox from "@/components/ImageLightbox";
 import { projects as allProjects } from "@/components/ProjectsContent";
 
@@ -68,14 +69,20 @@ export default function FeaturedProjects() {
                   className="block text-left p-3 pb-0"
                   aria-label={`Voir les détails du projet ${project.title}`}
                 >
-                  {/* Capture dans un écran de laptop */}
-                  <div className="relative rounded-[14px] overflow-hidden border border-border-color">
-                    <LaptopMock
-                      image={project.image}
-                      title={project.title}
-                      projectId={project.id}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    />
+                  {/* Capture dans une maquette laptop sur bureau */}
+                  <div className="relative aspect-[16/11] rounded-[14px] overflow-hidden border border-border-color">
+                    {project.image ? (
+                      <Image
+                        src={`/projects/mocks/${project.id}.webp`}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                      />
+                    ) : (
+                      <ProjectCover id={project.id} title={project.title} />
+                    )}
                     {project.id === "montrajetjoj" && (
                       <span className="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1.5 rounded-full bg-[var(--terracotta)] text-[#fff8ef] shadow-[var(--shadow-md)]">
                         Projet phare · JOJ Dakar 2026

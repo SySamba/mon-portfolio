@@ -880,3 +880,8 @@ h1, h2, h3 {
   }
 }
 
+
+/* Preloader : masqué dès le 1er rendu si déjà affiché dans la session */
+.preloader-done .preloader-overlay {
+  display: none;
+}

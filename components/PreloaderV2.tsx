@@ -2,40 +2,38 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import Image from 'next/image';
 
 /**
- * Preloader — écran de chargement premium affiché uniquement
- * lors de la toute première visite de la session (sessionStorage).
+ * Preloader — écran de chargement « Teranga moderne ».
  *
- * Usage (app/layout.tsx) :
+ * Affiché uniquement à la première visite de la session (sessionStorage).
+ * Le contenu réel est rendu immédiatement dessous (aucun blocage SEO) ;
+ * le voile disparaît en rideau vers le haut.
  *
- *   <Preloader>{children}</Preloader>
- *
- * Le composant enveloppe le contenu de l'app : le contenu réel est
- * rendu immédiatement (bon pour le SEO, aucun blocage de rendu),
- * le voile de chargement est simplement superposé par-dessus puis
- * disparaît en fondu.
+ * Un script inline dans app/layout.tsx ajoute la classe `preloader-done`
+ * sur <html> pour les visites suivantes : l'overlay est masqué en CSS
+ * avant même l'hydratation (zéro flash).
  */
 
 const ROLES = [
   'Développeur Full Stack',
-  'Data Scientist',
-  'Data Analyst',
-  'Mobile Developer',
+  'Data Scientist & Analyst',
+  'Applications Mobiles',
+  'Dakar · Sénégal',
 ] as const;
 
-const TOTAL_DURATION = 6000; // ms — durée totale du preloader
-const ROLE_INTERVAL = 1200; // ms — vitesse de rotation des intitulés de poste
+const TOTAL_DURATION = 3200; // ms
+const ROLE_INTERVAL = 750; // ms
 const STORAGE_KEY = 'sambasy:preloader-shown';
+
+const EASE_CURTAIN = [0.76, 0, 0.24, 1] as const;
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 interface PreloaderProps {
   children: React.ReactNode;
-  /** Chemin du logo, à adapter selon votre projet (SVG recommandé). */
-  logoSrc?: string;
 }
 
-export default function Preloader({ children, logoSrc = '/logo.svg' }: PreloaderProps) {
+export default function Preloader({ children }: PreloaderProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
   const [roleIndex, setRoleIndex] = useState(0);
@@ -43,12 +41,11 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    // Skip silencieux si déjà affiché durant cette session (SPA nav incluse).
     let alreadyShown = false;
     try {
       alreadyShown = sessionStorage.getItem(STORAGE_KEY) === 'true';
     } catch {
-      // sessionStorage indisponible (SSR strict, navigation privée bloquée…) : on affiche quand même.
+      // sessionStorage indisponible : on affiche quand même.
     }
 
     if (alreadyShown) {
@@ -61,8 +58,7 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
 
     const tick = (now: number) => {
       const elapsed = now - start;
-      const pct = Math.min(100, (elapsed / total) * 100);
-      setProgress(pct);
+      setProgress(Math.min(100, (elapsed / total) * 100));
 
       if (elapsed < total) {
         rafId.current = requestAnimationFrame(tick);
@@ -91,7 +87,7 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
     };
   }, [prefersReducedMotion]);
 
-  // Bloque le scroll pendant l'affichage, sans jamais bloquer le rendu du contenu réel.
+  // Bloque le scroll pendant l'affichage, sans bloquer le rendu du contenu réel.
   useEffect(() => {
     if (typeof document === 'undefined') return;
     document.body.style.overflow = isVisible ? 'hidden' : '';
@@ -99,6 +95,8 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
       document.body.style.overflow = '';
     };
   }, [isVisible]);
+
+  const wordmark = ['S', 'a', 'm', 'b', 'a', ' ', 'S', 'Y'];
 
   return (
     <>
@@ -111,56 +109,86 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
             role="status"
             aria-live="polite"
             aria-label="Chargement du site en cours"
-            className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0B1120] to-[#111827]"
+            className="preloader-overlay fixed inset-0 z-[100000] flex items-center justify-center overflow-hidden bg-dark-bg text-text-primary"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: 'blur(8px)' }}
-            transition={{ duration: prefersReducedMotion ? 0.15 : 0.6, ease: 'easeInOut' }}
+            exit={{ y: '-100%' }}
+            transition={{
+              duration: prefersReducedMotion ? 0.15 : 0.75,
+              ease: EASE_CURTAIN,
+            }}
           >
-            {!prefersReducedMotion && <AmbientParticles />}
+            {!prefersReducedMotion && <Ambient />}
+
+            {/* Texture losange Teranga, très discrète */}
+            <div
+              className="t-diamond-bg pointer-events-none absolute inset-0 opacity-[0.05]"
+              aria-hidden="true"
+            />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
               className="relative z-10 flex flex-col items-center px-6"
             >
-              <div className="relative h-16 w-16 sm:h-20 sm:w-20">
-                <Image
-                  src={logoSrc}
-                  alt="Sambasy"
-                  fill
-                  priority
-                  sizes="80px"
-                  className="object-contain"
-                />
+              {/* Monogramme : lettres qui se révèlent une à une */}
+              <div
+                className="font-display flex max-w-full items-baseline overflow-hidden text-[clamp(2.5rem,13vw,4.5rem)] font-semibold tracking-tight"
+                aria-label="Samba SY"
+              >
+                {wordmark.map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    initial={prefersReducedMotion ? false : { y: '110%', opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.55,
+                      delay: 0.15 + i * 0.045,
+                      ease: EASE_OUT,
+                    }}
+                    className="inline-block"
+                  >
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </motion.span>
+                ))}
+                <motion.span
+                  initial={prefersReducedMotion ? false : { scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.15 + wordmark.length * 0.045 + 0.15 }}
+                  className="inline-block text-[var(--terracotta)]"
+                  aria-hidden="true"
+                >
+                  .
+                </motion.span>
               </div>
 
-              <div className="mt-5 h-10 min-w-[260px] overflow-hidden text-center sm:min-w-[320px]">
+              {/* Rôle rotatif */}
+              <div className="mt-4 h-6 min-w-[260px] overflow-hidden text-center sm:min-w-[320px]">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={ROLES[roleIndex]}
-                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
+                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
-                    transition={{ duration: 0.35, ease: 'easeOut' }}
-                    className="block text-base font-semibold tracking-wide text-white sm:text-lg"
+                    exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -8 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="block text-xs font-semibold uppercase tracking-[0.22em] text-text-muted"
                   >
                     {ROLES[roleIndex]}
                   </motion.span>
                 </AnimatePresence>
               </div>
 
-              <div className="mt-7 h-[3px] w-40 overflow-hidden rounded-full bg-white/10 sm:w-56">
-                <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-sky-400 via-indigo-400 to-violet-400"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: 'linear' }}
-                />
+              {/* Barre de progression terracotta → ocre */}
+              <div className="mt-8 flex w-56 items-center gap-3 sm:w-72">
+                <div className="h-[2px] flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--text-primary)_12%,transparent)]">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--terracotta)] to-[var(--ochre)]"
+                    style={{ width: `${progress}%` }}
+                    transition={{ ease: 'linear' }}
+                  />
+                </div>
+                <span className="font-display w-9 text-right text-sm italic tabular-nums text-text-muted">
+                  {Math.round(progress)}%
+                </span>
               </div>
-
-              <span className="mt-2 text-xs tabular-nums text-slate-500">
-                {Math.round(progress)}%
-              </span>
             </motion.div>
           </motion.div>
         )}
@@ -170,39 +198,27 @@ export default function Preloader({ children, logoSrc = '/logo.svg' }: Preloader
 }
 
 /**
- * Léger effet de lumière/particules en arrière-plan.
- * Volontairement discret : peu d'éléments, animations basées sur
- * transform/opacity (peu coûteuses), pour rester fluide sur mobile bas de gamme.
+ * Halos de lumière terracotta/ocre en arrière-plan.
+ * Animations sur transform/opacity uniquement — fluide sur mobile.
  */
-function AmbientParticles() {
-  const dots = Array.from({ length: 10 });
-
+function Ambient() {
   return (
-    <div className="pointer-events-none absolute inset-0">
-      {/* halo de lumière central */}
+    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       <motion.div
-        className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-3xl"
-        animate={{ opacity: [0.5, 0.9, 0.5], scale: [1, 1.08, 1] }}
+        className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--terracotta)] opacity-[0.08] blur-3xl"
+        animate={{ opacity: [0.05, 0.11, 0.05], scale: [1, 1.1, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       />
-
-      {dots.map((_, i) => {
-        const left = (i * 37) % 100;
-        const top = (i * 53) % 100;
-        const size = 2 + (i % 3);
-        const duration = 6 + (i % 4);
-        const delay = (i % 5) * 0.4;
-
-        return (
-          <motion.span
-            key={i}
-            className="absolute rounded-full bg-sky-300/40"
-            style={{ left: `${left}%`, top: `${top}%`, width: size, height: size }}
-            animate={{ y: [0, -18, 0], opacity: [0.15, 0.6, 0.15] }}
-            transition={{ duration, repeat: Infinity, ease: 'easeInOut', delay }}
-          />
-        );
-      })}
+      <motion.div
+        className="absolute bottom-[-15%] right-[-10%] h-[320px] w-[320px] rounded-full bg-[var(--ochre)] opacity-[0.07] blur-3xl"
+        animate={{ opacity: [0.04, 0.09, 0.04] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+      />
+      <motion.div
+        className="absolute left-[-10%] top-[-15%] h-[280px] w-[280px] rounded-full bg-[var(--ocean)] opacity-[0.06] blur-3xl"
+        animate={{ opacity: [0.03, 0.08, 0.03] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+      />
     </div>
   );
 }

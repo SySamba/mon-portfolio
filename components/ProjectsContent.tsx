@@ -56,6 +56,45 @@ export const projects = [
     link: "https://montrajetjoj.sn/",
   },
   {
+    id: "carte-electorale",
+    category: "data",
+    badge: "Data",
+    image: "/projects/carte-electorale.webp",
+    title: "Carte Électorale Interactive du Sénégal",
+    description:
+      "Carte interactive des élections législatives anticipées du 17 novembre 2024 : électeurs inscrits, bureaux et lieux de vote par région, département et commune.",
+    fullDescription:
+      "Application de visualisation cartographique des données électorales sénégalaises pour les législatives anticipées du 17 novembre 2024. La carte permet d'explorer les 14 régions, 46 départements et 552 communes : survol pour les statistiques, clic pour zoomer, bascule entre inscrits et résultats, recherche de commune et classements automatiques.",
+    year: "2024",
+    client: "Projet personnel · données publiques",
+    role: "Développeur Data & Cartographie",
+    challenge:
+      "Rendre explorables des dizaines de milliers de données électorales (inscrits, bureaux, lieux de vote) sur une carte fluide et lisible, accessible au grand public.",
+    solution:
+      "Carte choroplèthe interactive construite en JavaScript et D3.js avec données GeoJSON : navigation par niveau administratif, indicateurs dynamiques, recherche et classements en temps réel.",
+    features: [
+      "Carte interactive : survol pour statistiques, clic pour explorer",
+      "3 niveaux : régions, départements, communes",
+      "Bascule Inscrits / Résultats",
+      "Recherche de commune ou département",
+      "6 644 713 électeurs, 14 742 bureaux, 6 329 lieux de vote",
+      "Classement des régions et principales communes",
+    ],
+    architecture: [
+      "JavaScript vanilla + D3.js",
+      "Données GeoJSON par niveau administratif",
+      "Sources : Min. de l'Intérieur, Conseil constitutionnel, OCHA",
+      "Fond de carte OpenStreetMap",
+    ],
+    results: [
+      "552 communes explorables en quelques clics",
+      "Données électorales officielles accessibles au grand public",
+      "Outil de référence pour suivre les législatives 2024",
+    ],
+    tech: ["JavaScript", "D3.js", "GeoJSON", "OpenStreetMap"],
+    link: "https://carte.sambasy.com/",
+  },
+  {
     id: "fake-news",
     category: "ai",
     badge: "IA",

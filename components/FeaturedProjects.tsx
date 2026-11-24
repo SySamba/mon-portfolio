@@ -16,7 +16,7 @@ const featuredIds = [
   "mairie-khombole",
   "air-traffic",
   "vending-senegal",
-  "mka-station",
+  "carte-electorale",
 ];
 
 const isWeb = (category: string) => category.split(" ").some((c) => c === "web" || c === "e-commerce");
@@ -94,7 +94,7 @@ export default function FeaturedProjects() {
                 {/* Texte : hauteurs alignées d'une carte à l'autre */}
                 <div className="flex flex-col flex-1 p-6 pt-5 border-t border-border-color">
                   <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
-                    {isWeb(project.category) ? "Développement web" : project.category.includes("dashboard") ? "Data & BI" : "Intelligence artificielle"}
+                    {isWeb(project.category) ? "Développement web" : project.category.includes("dashboard") ? "Data & BI" : project.category === "data" ? "Data" : "Intelligence artificielle"}
                   </p>
                   {/* Titre court : « Vending Sénégal - Distributeurs… » → « Vending Sénégal » */}
                   <h3 className="font-display text-[1.45rem] leading-snug font-normal mt-2 line-clamp-2 sm:min-h-[2lh]">

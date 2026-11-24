@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 /**
- * Preloader — écran de chargement « Teranga moderne ».
+ * Preloader — « orbe Teranga ».
+ *
+ * Séquence inspirée d'une animation logo : une sphère lumineuse
+ * terracotta/ocre se matérialise, tourne sur elle-même comme une pièce,
+ * puis se rétracte en monogramme devant le logotype « Samba SY. ».
  *
  * Affiché uniquement à la première visite de la session (sessionStorage).
- * Le contenu réel est rendu immédiatement dessous (aucun blocage SEO) ;
- * le voile disparaît en rideau vers le haut.
- *
- * Un script inline dans app/layout.tsx ajoute la classe `preloader-done`
- * sur <html> pour les visites suivantes : l'overlay est masqué en CSS
- * avant même l'hydratation (zéro flash).
+ * Le contenu réel est rendu dessous (aucun blocage SEO) ; le voile part
+ * en rideau vers le haut. La classe `preloader-done` (posée par le script
+ * inline du layout) le masque avant hydratation aux visites suivantes.
  */
 
 const ROLES = [
@@ -22,8 +23,8 @@ const ROLES = [
   'Dakar · Sénégal',
 ] as const;
 
-const TOTAL_DURATION = 3200; // ms
-const ROLE_INTERVAL = 750; // ms
+const TOTAL_DURATION = 3600; // ms
+const ROLE_INTERVAL = 900; // ms
 const STORAGE_KEY = 'sambasy:preloader-shown';
 
 const EASE_CURTAIN = [0.76, 0, 0.24, 1] as const;
@@ -37,8 +38,16 @@ export default function Preloader({ children }: PreloaderProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
   const [roleIndex, setRoleIndex] = useState(0);
+  const [wmWidth, setWmWidth] = useState(0);
+  const wmRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | undefined>(undefined);
   const prefersReducedMotion = useReducedMotion();
+
+  // Mesure le logotype (invisible mais en layout) pour centrer l'orbe
+  // seule au départ, puis la laisser glisser quand le texte apparaît.
+  useLayoutEffect(() => {
+    if (wmRef.current) setWmWidth(wmRef.current.offsetWidth + 20);
+  }, []);
 
   useEffect(() => {
     let alreadyShown = false;
@@ -96,7 +105,7 @@ export default function Preloader({ children }: PreloaderProps) {
     };
   }, [isVisible]);
 
-  const wordmark = ['S', 'a', 'm', 'b', 'a', ' ', 'S', 'Y'];
+  const wordmark = ['S', 'a', 'm', 'b', 'a', ' ', 'S', 'Y', '.'];
 
   return (
     <>
@@ -109,7 +118,7 @@ export default function Preloader({ children }: PreloaderProps) {
             role="status"
             aria-live="polite"
             aria-label="Chargement du site en cours"
-            className="preloader-overlay fixed inset-0 z-[100000] flex items-center justify-center overflow-hidden bg-dark-bg text-text-primary"
+            className="preloader-overlay fixed inset-0 z-[100000] flex items-center justify-center overflow-hidden bg-[#16110d]"
             initial={{ opacity: 1 }}
             exit={{ y: '-100%' }}
             transition={{
@@ -117,51 +126,103 @@ export default function Preloader({ children }: PreloaderProps) {
               ease: EASE_CURTAIN,
             }}
           >
-            {!prefersReducedMotion && <Ambient />}
-
             {/* Texture losange Teranga, très discrète */}
             <div
-              className="t-diamond-bg pointer-events-none absolute inset-0 opacity-[0.05]"
+              className="t-diamond-bg pointer-events-none absolute inset-0 opacity-[0.04] invert"
               aria-hidden="true"
             />
+            {!prefersReducedMotion && <Ambient />}
 
             <motion.div
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
               className="relative z-10 flex flex-col items-center px-6"
             >
-              {/* Monogramme : lettres qui se révèlent une à une */}
+              {/* Lockup : orbe → monogramme + logotype */}
               <div
-                className="font-display flex max-w-full items-baseline overflow-hidden text-[clamp(2.5rem,13vw,4.5rem)] font-semibold tracking-tight"
-                aria-label="Samba SY"
+                className="flex h-[150px] items-center sm:h-[170px]"
+                style={{ perspective: 900 }}
               >
-                {wordmark.map((letter, i) => (
+                {/* Onde de choc à l'apparition de l'orbe */}
+                {!prefersReducedMotion && (
                   <motion.span
-                    key={i}
-                    initial={prefersReducedMotion ? false : { y: '110%', opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.55,
-                      delay: 0.15 + i * 0.045,
-                      ease: EASE_OUT,
-                    }}
-                    className="inline-block"
-                  >
-                    {letter === ' ' ? '\u00A0' : letter}
-                  </motion.span>
-                ))}
-                <motion.span
-                  initial={prefersReducedMotion ? false : { scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.15 + wordmark.length * 0.045 + 0.15 }}
-                  className="inline-block text-[var(--terracotta)]"
-                  aria-hidden="true"
+                    className="pointer-events-none absolute rounded-full border-2 border-[var(--ochre)]"
+                    style={{ width: 170, height: 170 }}
+                    initial={{ scale: 0.4, opacity: 0.9 }}
+                    animate={{ scale: 2.1, opacity: 0 }}
+                    transition={{ duration: 1.1, ease: 'easeOut', delay: 0.15 }}
+                    aria-hidden="true"
+                  />
+                )}
+
+                {/* L'orbe : matérialisation → rotation pièce → rétractation */}
+                <motion.div
+                  className="relative flex items-center justify-center rounded-full"
+                  style={{
+                    width: 168,
+                    height: 168,
+                    background:
+                      'radial-gradient(circle at 34% 30%, #f6c46b 0%, #e0a43a 34%, #c8553d 72%, #8f3a26 100%)',
+                    boxShadow:
+                      '0 0 55px rgba(224,164,58,.65), 0 0 130px rgba(200,85,61,.45), inset 0 0 26px rgba(120,40,20,.45)',
+                  }}
+                  initial={prefersReducedMotion ? { scale: 0.34 } : { scale: 0, rotateY: 0, x: wmWidth / 2 }}
+                  animate={
+                    prefersReducedMotion
+                      ? { scale: 0.34 }
+                      : {
+                          scale: [0, 1.12, 1, 1, 0.34],
+                          rotateY: [0, 0, 720, 720],
+                          x: [wmWidth / 2, wmWidth / 2, wmWidth / 2, 0],
+                        }
+                  }
+                  transition={
+                    prefersReducedMotion
+                      ? { duration: 0.2 }
+                      : { duration: 2.7, times: [0, 0.18, 0.62, 1], ease: 'easeInOut' }
+                  }
                 >
-                  .
-                </motion.span>
+                  {/* Anneau interne façon pièce */}
+                  <span
+                    className="absolute rounded-full border border-[rgba(255,248,239,.35)]"
+                    style={{ inset: 12 }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="font-display font-semibold text-[#fff8ef]"
+                    style={{ fontSize: 58, textShadow: '0 2px 14px rgba(80,20,10,.5)' }}
+                  >
+                    SY
+                  </span>
+                </motion.div>
+
+                {/* Logotype : apparaît une fois l'orbe rétractée */}
+                <div className="ml-4 overflow-hidden sm:ml-6">
+                  <div
+                    ref={wmRef}
+                    className="font-display flex items-baseline text-[clamp(2.1rem,9vw,3.4rem)] font-semibold tracking-tight text-[#f4ede1]"
+                    aria-label="Samba SY"
+                  >
+                    {wordmark.map((letter, i) => (
+                      <motion.span
+                        key={i}
+                        initial={prefersReducedMotion ? false : { y: '115%', opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: prefersReducedMotion ? 0 : 1.9 + i * 0.04,
+                          ease: EASE_OUT,
+                        }}
+                        className={`inline-block${letter === '.' ? ' text-[var(--terracotta)]' : ''}`}
+                      >
+                        {letter === ' ' ? '\u00A0' : letter}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Rôle rotatif */}
-              <div className="mt-4 h-6 min-w-[260px] overflow-hidden text-center sm:min-w-[320px]">
+              <div className="mt-2 h-6 min-w-[260px] overflow-hidden text-center sm:min-w-[320px]">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={ROLES[roleIndex]}
@@ -169,7 +230,7 @@ export default function Preloader({ children }: PreloaderProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -8 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="block text-xs font-semibold uppercase tracking-[0.22em] text-text-muted"
+                    className="block text-xs font-semibold uppercase tracking-[0.22em] text-[#a89a88]"
                   >
                     {ROLES[roleIndex]}
                   </motion.span>
@@ -178,14 +239,14 @@ export default function Preloader({ children }: PreloaderProps) {
 
               {/* Barre de progression terracotta → ocre */}
               <div className="mt-8 flex w-56 items-center gap-3 sm:w-72">
-                <div className="h-[2px] flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--text-primary)_12%,transparent)]">
+                <div className="h-[2px] flex-1 overflow-hidden rounded-full bg-white/10">
                   <motion.div
                     className="h-full rounded-full bg-gradient-to-r from-[var(--terracotta)] to-[var(--ochre)]"
                     style={{ width: `${progress}%` }}
                     transition={{ ease: 'linear' }}
                   />
                 </div>
-                <span className="font-display w-9 text-right text-sm italic tabular-nums text-text-muted">
+                <span className="font-display w-9 text-right text-sm italic tabular-nums text-[#a89a88]">
                   {Math.round(progress)}%
                 </span>
               </div>
@@ -198,27 +259,40 @@ export default function Preloader({ children }: PreloaderProps) {
 }
 
 /**
- * Halos de lumière terracotta/ocre en arrière-plan.
+ * Halo chaud derrière l'orbe + quelques étincelles.
  * Animations sur transform/opacity uniquement — fluide sur mobile.
  */
 function Ambient() {
+  const sparks = Array.from({ length: 8 });
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       <motion.div
-        className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--terracotta)] opacity-[0.08] blur-3xl"
-        animate={{ opacity: [0.05, 0.11, 0.05], scale: [1, 1.1, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--terracotta)] blur-3xl"
+        animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.12, 1] }}
+        transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-[-15%] right-[-10%] h-[320px] w-[320px] rounded-full bg-[var(--ochre)] opacity-[0.07] blur-3xl"
-        animate={{ opacity: [0.04, 0.09, 0.04] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--ochre)] blur-3xl"
+        animate={{ opacity: [0.12, 0.24, 0.12] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
       />
-      <motion.div
-        className="absolute left-[-10%] top-[-15%] h-[280px] w-[280px] rounded-full bg-[var(--ocean)] opacity-[0.06] blur-3xl"
-        animate={{ opacity: [0.03, 0.08, 0.03] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-      />
+      {sparks.map((_, i) => {
+        const angle = (i / sparks.length) * Math.PI * 2;
+        const dist = 120 + (i % 3) * 40;
+        return (
+          <motion.span
+            key={i}
+            className="absolute left-1/2 top-1/2 block h-[3px] w-[3px] rounded-full bg-[var(--ochre)]"
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: Math.cos(angle) * dist,
+              y: Math.sin(angle) * dist,
+              opacity: [0, 0.9, 0],
+            }}
+            transition={{ duration: 1.4, delay: 0.25 + i * 0.06, ease: 'easeOut' }}
+          />
+        );
+      })}
     </div>
   );
 }

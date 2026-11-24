@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import JsonLd from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Preloader from "@/components/PreloaderV2";
 import {
   OG_IMAGE,
   OG_IMAGE_HEIGHT,
@@ -39,12 +38,6 @@ const THEME_INIT =
   "(function(){try{var t=localStorage.getItem('theme')||'light';" +
   "var d=document.documentElement;d.setAttribute('data-theme',t);" +
   "d.classList.toggle('dark',t==='dark')}catch(e){}})()";
-
-// Masque le préchargeur dès le premier rendu s'il a déjà été affiché
-// durant cette session (évite tout flash avant l'hydratation React).
-const PRELOADER_INIT =
-  "(function(){try{if(sessionStorage.getItem('sambasy:preloader-shown')==='true')" +
-  "document.documentElement.classList.add('preloader-done')}catch(e){}})()";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -140,7 +133,6 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
-        <script dangerouslySetInnerHTML={{ __html: PRELOADER_INIT }} />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
         {/*
@@ -175,7 +167,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">
-            <Preloader>{children}</Preloader>
+            {children}
           </main>
           <Footer />
           <ChatWidget />
